@@ -1,0 +1,72 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="#FAFAFA">
+
+    <!-- HEADER -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#111827"
+        android:orientation="vertical"
+        android:padding="16dp">
+
+    </LinearLayout>
+
+    <!-- BÚSQUEDA -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:padding="12dp"
+        android:background="#FFFFFF"
+        android:elevation="2dp">
+
+        <ImageView
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            app:srcCompat="@drawable/outline_checkroom_24"
+            />
+
+        <EditText
+            android:id="@+id/etSearch"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Buscar por nombre..."
+            android:padding="8dp"
+            android:layout_marginStart="8dp" />
+    </LinearLayout>
+
+    <!-- FILTROS -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:padding="8dp"
+        android:gravity="center"
+        android:weightSum="4">
+
+        <Spinner android:id="@+id/spMarca"
+            android:layout_width="0dp" android:layout_height="wrap_content"
+            android:layout_weight="1"/>
+        <Spinner android:id="@+id/spTipo"
+            android:layout_width="0dp" android:layout_height="wrap_content"
+            android:layout_weight="1"/>
+        <Spinner android:id="@+id/spTalla"
+            android:layout_width="0dp" android:layout_height="wrap_content"
+            android:layout_weight="1"/>
+        <Spinner android:id="@+id/spCantidad"
+            android:layout_width="0dp" android:layout_height="wrap_content"
+            android:layout_weight="1"/>
+    </LinearLayout>
+
+    <!-- LISTA -->
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rvProductos"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:padding="12dp" />
+</LinearLayout>

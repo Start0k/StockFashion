@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="#FAFAFA">
+
+    <!-- Header -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#FFFFFF"
+        android:padding="16dp"
+        android:elevation="4dp"
+        android:orientation="horizontal">
+
+        <FrameLayout
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:background="@drawable/outline_circle_24">
+
+            <ImageView
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:layout_gravity="center"
+
+                app:srcCompat="@drawable/outline_checkroom_24"/>
+        </FrameLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_marginStart="12dp">
+
+            <TextView
+                android:text="StockFashion"
+                android:textColor="#111827"
+                android:textSize="18sp"
+                android:textStyle="bold"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+
+            <TextView
+                android:text="Ingreso de Ropa"
+                android:textColor="#525252"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+        </LinearLayout>
+    </LinearLayout>
+
+    <!-- Contenido -->
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:fillViewport="true">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="16dp">
+
+            <!-- Formulario -->
+            <EditText
+                android:id="@+id/etNombre"
+                android:hint="Nombre"
+                style="@style/Widget.MaterialComponents.TextInputEditText.OutlinedBox"
+
+                android:padding="12dp"
+                android:layout_width="match_parent"
+                android:layout_height="48dp"/>
+
+            <EditText
+                android:id="@+id/etMarca"
+                android:hint="Marca"
+                android:layout_marginTop="8dp"
+
+                android:padding="12dp"
+                android:layout_width="match_parent"
+                android:layout_height="48dp"/>
+
+            <EditText
+                android:id="@+id/etTipo"
+                android:hint="Tipo (Camiseta, Pantalón...)"
+                android:layout_marginTop="8dp"
+
+                android:padding="12dp"
+                android:layout_width="match_parent"
+                android:layout_height="48dp"/>
+
+            <EditText
+                android:id="@+id/etTalla"
+                android:hint="Talla (M, 32, etc.)"
+                android:layout_marginTop="8dp"
+
+                android:padding="12dp"
+                android:layout_width="match_parent"
+                android:layout_height="48dp"/>
+
+            <EditText
+                android:id="@+id/etCantidad"
+                android:hint="Cantidad"
+                android:inputType="number"
+                android:layout_marginTop="8dp"
+
+                android:padding="12dp"
+                android:layout_width="match_parent"
+                android:layout_height="48dp"/>
+
+            <Button
+                android:id="@+id/btnAgregar"
+                android:text="Agregar"
+                android:layout_marginTop="12dp"
+                android:backgroundTint="#111827"
+                android:textAllCaps="false"
+                android:layout_width="match_parent"
+                android:layout_height="48dp"/>
+
+            <!-- Lista -->
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rvItems"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"/>
+        </LinearLayout>
+    </ScrollView>
+</LinearLayout>

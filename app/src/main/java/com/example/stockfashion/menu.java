@@ -1,5 +1,6 @@
 package com.example.stockfashion;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.widget.Toast;
 
@@ -30,20 +31,24 @@ public class menu extends AppCompatActivity {
         MaterialCardView cardModificar = findViewById(R.id.cardModificar);
         MaterialCardView cardDespacho  = findViewById(R.id.cardDespacho);
 
-        cardIngreso.setOnClickListener(v ->
-                Toast.makeText(this, "Ingreso de ropa", Toast.LENGTH_SHORT).show()
+        cardIngreso.setOnClickListener(v -> {
+                    startActivity(new Intent(this, Ingreso.class));
+                }
         );
 
-        cardStock.setOnClickListener(v ->
-                Toast.makeText(this, "Ver stock", Toast.LENGTH_SHORT).show()
+        cardStock.setOnClickListener(v -> {
+                    startActivity(new Intent(this, verStock.class));
+                }
         );
 
-        cardModificar.setOnClickListener(v ->
-                Toast.makeText(this, "Modificar", Toast.LENGTH_SHORT).show()
+        cardModificar.setOnClickListener(v -> {
+                    startActivity(new Intent(this, Modificar.class));
+                }
         );
 
-        cardDespacho.setOnClickListener(v ->
-                Toast.makeText(this, "Orden de despacho", Toast.LENGTH_SHORT).show()
+        cardDespacho.setOnClickListener(v -> {
+                    //startActivity(new Intent(this, Despacho.class))
+                }
         );
 
         // TODO: reemplaza los Toast por startActivity(new Intent(...)) a tus pantallas reales.

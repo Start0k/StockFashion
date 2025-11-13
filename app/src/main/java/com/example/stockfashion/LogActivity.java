@@ -61,11 +61,11 @@ public class LogActivity extends AppCompatActivity {
         });
 
         //Boton que redirecciona a activity registro
-//        Button button2 = findViewById(R.id.btnRegistrarseLog);
+//        Button button2 = findViewById(R.id.btnLogRegistrarse);
 //        button2.setOnClickListener(new View.OnClickListener() {
 //            @Override
 //            public void onClick(View view) {
-//                Intent intent = new Intent(LogActivity.this, RegistroActivity.class);
+//                Intent intent = new Intent(LogActivity.this, RegActivity.class);
 //                startActivity(intent);
 //            }
 //        });

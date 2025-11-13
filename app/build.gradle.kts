@@ -47,6 +47,7 @@ dependencies {
     //agregadas para usar firebase VV
     implementation(platform("com.google.firebase:firebase-bom:34.5.0"))
     implementation("com.google.firebase:firebase-analytics")
+    implementation("com.google.android.material:material:1.12.0")
     //CRASHLYTICS
     implementation(platform("com.google.firebase:firebase-bom:34.5.0"))
     implementation("com.google.firebase:firebase-crashlytics-ndk")

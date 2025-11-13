@@ -12,6 +12,10 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.StockFashion">
         <activity
+            android:name=".RegActivity"
+            android:exported="false"
+            android:theme="@style/Theme.StockFashion" />
+        <activity
             android:name=".Modificar"
             android:exported="false" />
         <activity

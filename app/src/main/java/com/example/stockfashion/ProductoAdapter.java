@@ -1,70 +1,81 @@
 package com.example.stockfashion;
 
+import com.example.stockfashion.Producto;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
+
 import java.util.List;
-import java.util.Locale;
 
 public class ProductoAdapter extends RecyclerView.Adapter<ProductoAdapter.ProductoViewHolder> {
 
     private List<Producto> listaProductos;
 
-    // Constructor que recibe la lista de datos
+    // Constructor para recibir la lista de productos
     public ProductoAdapter(List<Producto> listaProductos) {
         this.listaProductos = listaProductos;
     }
 
-    // Crea la vista para cada item (infla el layout item_producto.xml)
+    /**
+     * Crea nuevas vistas (invocado por el layout manager).
+     * Aquí se "infla" el layout XML de cada item.
+     */
     @NonNull
     @Override
     public ProductoViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_producto, parent, false);
+        // Crea una nueva vista desde nuestro layout item_producto.xml
+        View view = LayoutInflater.from(parent.getContext())
+                .inflate(R.layout.item_producto, parent, false);
         return new ProductoViewHolder(view);
     }
 
-    // Vincula los datos de un producto específico a una vista (ViewHolder)
+    /**
+     * Reemplaza el contenido de una vista (invocado por el layout manager).
+     * Aquí se asignan los datos del producto a las vistas (TextViews).
+     */
     @Override
     public void onBindViewHolder(@NonNull ProductoViewHolder holder, int position) {
+        // Obtiene el producto de la lista en la posición actual
         Producto producto = listaProductos.get(position);
-        holder.bind(producto);
+
+        // Asigna los datos del producto a los TextViews del ViewHolder
+        holder.nombreTextView.setText(producto.getNombre());
+        holder.marcaTextView.setText(producto.getMarca());
+        holder.tipoTextView.setText(producto.getTipo());
+        holder.tallaTextView.setText("Talla: " + producto.getTalla());
+        holder.cantidadTextView.setText("Cantidad: " + producto.getCantidad());
     }
 
-    // Retorna el número total de items en la lista
+    /**
+     * Devuelve el tamaño de tu dataset (invocado por el layout manager).
+     */
     @Override
     public int getItemCount() {
         return listaProductos.size();
     }
 
-    // Clase interna que representa cada "fila" de la lista
+
+    /**
+     * ViewHolder: Representa cada elemento de la lista y contiene las referencias a sus vistas (TextViews).
+     * Esto evita hacer findViewById() repetidamente, mejorando el rendimiento.
+     */
     public static class ProductoViewHolder extends RecyclerView.ViewHolder {
-        private TextView tvNombre, tvDetalles, tvCantidad;
+        public TextView nombreTextView;
+        public TextView marcaTextView;
+        public TextView tipoTextView;
+        public TextView tallaTextView;
+        public TextView cantidadTextView;
 
-        public ProductoViewHolder(@NonNull View itemView) {
+        public ProductoViewHolder(View itemView) {
             super(itemView);
-            tvNombre = itemView.findViewById(R.id.tvNombreProducto);
-            tvDetalles = itemView.findViewById(R.id.tvDetallesProducto);
-            tvCantidad = itemView.findViewById(R.id.tvCantidadProducto);
-        }
-
-        // Método para llenar los TextViews con los datos del producto
-        public void bind(Producto producto) {
-            tvNombre.setText(producto.getNombre());
-            String detalles = String.format(Locale.getDefault(), "Marca: %s - Tipo: %s - Talla: %s",
-                    producto.getMarca(),
-                    producto.getTipo(),
-                    producto.getTalla());
-            tvDetalles.setText(detalles);
-
-            // Se verifica que cantidad no sea null
-            if (producto.getCantidad() != null) {
-                tvCantidad.setText("x" + producto.getCantidad());
-            } else {
-                tvCantidad.setText("x0");
-            }
+            nombreTextView = itemView.findViewById(R.id.textViewNombre);
+            marcaTextView = itemView.findViewById(R.id.textViewMarca);
+            tipoTextView = itemView.findViewById(R.id.textViewTipo);
+            tallaTextView = itemView.findViewById(R.id.textViewTalla);
+            cantidadTextView = itemView.findViewById(R.id.textViewCantidad);
         }
     }
 }

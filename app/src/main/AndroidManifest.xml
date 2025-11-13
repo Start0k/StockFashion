@@ -24,7 +24,7 @@
             android:name=".menu"
             android:exported="false" />
         <activity
-            android:name=".MainActivity"
+            android:name=".LogActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

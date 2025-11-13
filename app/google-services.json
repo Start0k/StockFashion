@@ -1,0 +1,68 @@
+{
+  "project_info": {
+    "project_number": "720220860507",
+    "firebase_url": "https://bd11-8b1bf-default-rtdb.firebaseio.com",
+    "project_id": "bd11-8b1bf",
+    "storage_bucket": "bd11-8b1bf.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:720220860507:android:5ed03a315a46c0951dcf7e",
+        "android_client_info": {
+          "package_name": "com.Proyecto.ChanchitoFeliz"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBB-Y1NFvTHi4TmSxyJ-uiT9cAhZ4HCnro"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:720220860507:android:98f3275e105dd31a1dcf7e",
+        "android_client_info": {
+          "package_name": "com.example.stockfashion"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBB-Y1NFvTHi4TmSxyJ-uiT9cAhZ4HCnro"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:720220860507:android:b3608b2ca6c7e8561dcf7e",
+        "android_client_info": {
+          "package_name": "com.sample.text"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBB-Y1NFvTHi4TmSxyJ-uiT9cAhZ4HCnro"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

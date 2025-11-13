@@ -55,13 +55,13 @@
             android:layout_height="wrap_content"/>
 
         <EditText
-            android:id="@+id/inputEmail"
-            android:hint="tu@email.com"
-            android:inputType="textEmailAddress"
-            android:backgroundTint="#E5E7EB"
-            android:layout_marginTop="6dp"
+            android:id="@+id/txtMainCorreo"
             android:layout_width="match_parent"
-            android:layout_height="48dp"/>
+            android:layout_height="48dp"
+            android:layout_marginTop="6dp"
+            android:backgroundTint="#E5E7EB"
+            android:hint="Ingrese su Correo"
+            android:inputType="textEmailAddress" />
 
         <!-- Password -->
         <LinearLayout
@@ -90,7 +90,7 @@
         </LinearLayout>
 
         <EditText
-            android:id="@+id/inputPassword"
+            android:id="@+id/txtMainPass"
             android:hint="••••••••"
             android:inputType="textPassword"
             android:backgroundTint="#E5E7EB"

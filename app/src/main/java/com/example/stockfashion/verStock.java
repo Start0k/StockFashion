@@ -29,16 +29,16 @@ public class verStock extends AppCompatActivity implements GestionProductoAdapte
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        // EdgeToEdge.enable(this); // A menudo causa problemas con diálogos, considera quitarlo si hay errores de UI
+
         setContentView(R.layout.activity_ver_stock);
 
         db = FirebaseFirestore.getInstance();
 
-        // Configurar RecyclerView
-        recyclerViewStock = findViewById(R.id.tblVerStock); // Asegúrate de que este ID exista en activity_ver_stock.xml
+
+        recyclerViewStock = findViewById(R.id.tblVerStock);
         recyclerViewStock.setLayoutManager(new LinearLayoutManager(this));
         listaProductos = new ArrayList<>();
-        adapter = new GestionProductoAdapter(listaProductos, this); // 'this' para pasar la activity como listener
+        adapter = new GestionProductoAdapter(listaProductos, this);
         recyclerViewStock.setAdapter(adapter);
 
         cargarProductos();
@@ -90,20 +90,20 @@ public class verStock extends AppCompatActivity implements GestionProductoAdapte
         builder.setTitle("Modificar Cantidad");
         builder.setMessage("Producto: " + producto.getNombre());
 
-        // Crear un EditText para que el usuario ingrese la nueva cantidad
+
         final EditText input = new EditText(this);
         input.setInputType(InputType.TYPE_CLASS_NUMBER);
         input.setHint("Nueva cantidad");
         input.setText(String.valueOf(producto.getCantidad())); // Muestra la cantidad actual
         builder.setView(input);
 
-        // Configurar botones del diálogo
+
         builder.setPositiveButton("Guardar", (dialog, which) -> {
             String nuevaCantidadStr = input.getText().toString();
             if (!nuevaCantidadStr.isEmpty()) {
                 try {
                     long nuevaCantidad = Long.parseLong(nuevaCantidadStr);
-                    // Actualizar en Firestore
+
                     db.collection("productos").document(producto.getId())
                             .update("cantidad", nuevaCantidad)
                             .addOnSuccessListener(aVoid -> Toast.makeText(verStock.this, "Cantidad actualizada", Toast.LENGTH_SHORT).show())
@@ -124,12 +124,12 @@ public class verStock extends AppCompatActivity implements GestionProductoAdapte
                 .setTitle("Eliminar Producto")
                 .setMessage("¿Estás seguro de que quieres eliminar '" + producto.getNombre() + "'? Esta acción no se puede deshacer.")
                 .setPositiveButton("Sí, Eliminar", (dialog, which) -> {
-                    // Eliminar de Firestore
+
                     db.collection("productos").document(producto.getId())
                             .delete()
                             .addOnSuccessListener(aVoid -> {
                                 Toast.makeText(verStock.this, "Producto eliminado", Toast.LENGTH_SHORT).show();
-                                // El listener de Firestore se encargará de removerlo de la lista
+
                             })
                             .addOnFailureListener(e -> Toast.makeText(verStock.this, "Error al eliminar", Toast.LENGTH_SHORT).show());
                 })

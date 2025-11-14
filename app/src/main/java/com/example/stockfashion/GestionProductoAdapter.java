@@ -19,7 +19,7 @@ public class GestionProductoAdapter extends RecyclerView.Adapter<GestionProducto
     private List<Producto> listaProductos;
     private final OnProductoInteractionListener mListener;
 
-    // Interfaz para comunicar eventos de clic a la Activity
+
     public interface OnProductoInteractionListener {
         void onModificarProducto(Producto producto);
         void onEliminarProducto(Producto producto, int position);
@@ -73,7 +73,7 @@ public class GestionProductoAdapter extends RecyclerView.Adapter<GestionProducto
                 tvCantidad.setText("x0");
             }
 
-            // Asignar listeners a los botones
+
             btnModificar.setOnClickListener(v -> listener.onModificarProducto(producto));
             btnEliminar.setOnClickListener(v -> listener.onEliminarProducto(producto, getAdapterPosition()));
         }

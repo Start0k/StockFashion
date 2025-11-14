@@ -47,10 +47,10 @@ public class menu extends AppCompatActivity {
         );
 
         cardDespacho.setOnClickListener(v -> {
-                    //startActivity(new Intent(this, Despacho.class))
+
                 }
         );
 
-        // TODO: reemplaza los Toast por startActivity(new Intent(...)) a tus pantallas reales.
+
     }
 }

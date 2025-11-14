@@ -25,7 +25,7 @@ public class LogActivity extends AppCompatActivity {
 
     private EditText txtMainCorreo, txtMainPass;
     private Button btnLogin;
-    //private ProgressBar progress;
+
 
     private FirebaseAnalytics oFirebaseAnalytics;
     private FirebaseAuth oFirebaseAuth;
@@ -35,7 +35,7 @@ public class LogActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.log_activity); // conexion con el layout de log_activity
+        setContentView(R.layout.log_activity);
 
         oFirebaseAnalytics = FirebaseAnalytics.getInstance(this);
         Bundle bundle = new Bundle();
@@ -71,11 +71,11 @@ public class LogActivity extends AppCompatActivity {
 
     }
 
-    //metodo recibe Correo y contraseña y los revisa con firebaseAuth para iniciar sesion
+
     private void ingresar(String email, String password){
         oFirebaseAuth.signInWithEmailAndPassword(email, password)
                 .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
-                    // ... dentro del método ingresar()
+
 
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
@@ -84,15 +84,15 @@ public class LogActivity extends AppCompatActivity {
 
                             Log.d(TAG, "SignInWithEmail:success");
                             FirebaseUser user = oFirebaseAuth.getCurrentUser();
-                            // updateUI(user); // Puedes llamar a este método si lo necesitas
 
-                            //Crea el Intent con el nombre correcto de la clase
+
+
                             Intent intent = new Intent(LogActivity.this, menu.class);
 
-                            //Ejecuta el Intent para cambiar de actividad
+
                             startActivity(intent);
 
-                            //Finaliza la actividad de Login
+
                             finish();
 
 
@@ -100,11 +100,11 @@ public class LogActivity extends AppCompatActivity {
                         } else {
                             Log.w(TAG, "signInWithEmail:failure", task.getException());
                             Toast.makeText(LogActivity.this, "Correo o contraseña incorrectos", Toast.LENGTH_SHORT).show();
-                            // updateUI(null);
+
                         }
                     }
 
-// ... resto del código
+
 
                 });
     }

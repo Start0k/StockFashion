@@ -4,8 +4,7 @@ import com.google.firebase.firestore.Exclude;
 
 public class Producto {
 
-    // 1. AÑADIR @EXCLUDE: Esto le dice a Firestore que no intente
-    //    guardar o leer este campo desde la base de datos.
+
     @Exclude
     private String id;
 
@@ -13,14 +12,13 @@ public class Producto {
     private String marca;
     private String tipo;
     private String talla;
-    private Long cantidad; // 2. CAMBIO A LONG: Es más compatible y seguro con Firestore que 'int'.
+    private Long cantidad;
 
-    // Constructor público y vacío. ¡OBLIGATORIO para Firestore!
+
     public Producto() {
     }
 
-    // 3. CONSTRUCTOR OPCIONAL: Útil si necesitas crear objetos Producto manualmente en tu código.
-    //    Nota que ya no incluye el 'id'.
+
     public Producto(String nombre, String marca, String tipo, String talla, Long cantidad) {
         this.nombre = nombre;
         this.marca = marca;
@@ -29,8 +27,7 @@ public class Producto {
         this.cantidad = cantidad;
     }
 
-    // --- GETTERS Y SETTERS ---
-    // (Estos ya los tenías bien, pero los adaptamos para Long)
+
 
     public String getId() {
         return id;

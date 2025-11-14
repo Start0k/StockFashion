@@ -42,7 +42,7 @@ public class Modificar extends AppCompatActivity {
             return insets;
         });
 
-        // Referencias a la vista
+
         etSearch    = findViewById(R.id.etSearch);
         spMarca     = findViewById(R.id.spMarca);
         spTipo      = findViewById(R.id.spTipo);
@@ -52,13 +52,13 @@ public class Modificar extends AppCompatActivity {
 
         rvProductos.setLayoutManager(new LinearLayoutManager(this));
 
-        // Datos de prueba
+
         cargarDatosDummy();
 
-        //  Llenar spinners dinámicamente según datos
+
         configurarSpinners();
 
-        //  Configurar RecyclerView
+
         adapter = new ProductoAdapter(listaFiltrada);
         rvProductos.setAdapter(adapter);
 
@@ -71,18 +71,18 @@ public class Modificar extends AppCompatActivity {
             @Override public void afterTextChanged(Editable s) { }
         });
 
-        //  Listeners de filtros
+
         spMarca.setOnItemSelectedListener(new SimpleOnItemSelectedListener(() -> filtrarLista()));
         spTipo.setOnItemSelectedListener(new SimpleOnItemSelectedListener(() -> filtrarLista()));
         spTalla.setOnItemSelectedListener(new SimpleOnItemSelectedListener(() -> filtrarLista()));
         spCantidad.setOnItemSelectedListener(new SimpleOnItemSelectedListener(() -> filtrarLista()));
 
-        // Primera carga
+
         filtrarLista();
     }
 
     private void cargarDatosDummy() {
-        // Reemplaza los números por su equivalente en Long añadiendo una 'L'
+
         listaOriginal.clear();
         listaOriginal.add(new Producto("Polera básica negra", "Nike",  "Polera", "M", 10L));
         listaOriginal.add(new Producto("Polera oversized blanca", "Adidas", "Polera", "L", 5L));
@@ -97,28 +97,28 @@ public class Modificar extends AppCompatActivity {
     }
 
     private void configurarSpinners() {
-        // Marca
+
         List<String> marcas = new ArrayList<>();
         marcas.add("Todas");
         marcas.addAll(obtenerValoresUnicosDeCampo("marca"));
         spMarca.setAdapter(new ArrayAdapter<>(this,
                 android.R.layout.simple_spinner_dropdown_item, marcas));
 
-        // Tipo
+
         List<String> tipos = new ArrayList<>();
         tipos.add("Todos");
         tipos.addAll(obtenerValoresUnicosDeCampo("tipo"));
         spTipo.setAdapter(new ArrayAdapter<>(this,
                 android.R.layout.simple_spinner_dropdown_item, tipos));
 
-        // Talla
+
         List<String> tallas = new ArrayList<>();
         tallas.add("Todas");
         tallas.addAll(obtenerValoresUnicosDeCampo("talla"));
         spTalla.setAdapter(new ArrayAdapter<>(this,
                 android.R.layout.simple_spinner_dropdown_item, tallas));
 
-        // Cantidad (aquí uso rangos como ejemplo sencillo)
+
         List<String> cantidades = new ArrayList<>();
         cantidades.add("Todas");
         cantidades.add("0 - 2");
@@ -158,29 +158,29 @@ public class Modificar extends AppCompatActivity {
 
         for (Producto p : listaOriginal) {
 
-            // Filtro por nombre
+
             if (!textoBusqueda.isEmpty() &&
                     !p.getNombre().toLowerCase().contains(textoBusqueda)) {
                 continue;
             }
 
-            // Filtro por marca
+
             if (!marcaSel.equals("Todas") && !p.getMarca().equals(marcaSel)) {
                 continue;
             }
 
-            // Filtro por tipo
+
             if (!tipoSel.equals("Todos") && !p.getTipo().equals(tipoSel)) {
                 continue;
             }
 
-            // Filtro por talla
+
             Long cantidadLong = p.getCantidad();
             if (cantidadLong == null) {
-                continue; // Si no tiene cantidad, lo ignoramos en el filtro
+                continue;
             }
 
-            // Filtro por cantidad (según rangos de ejemplo)
+
             int c = cantidadLong.intValue();
             if (cantSel.equals("0 - 2") && !(c >= 0 && c <= 2)) continue;
             if (cantSel.equals("3 - 5") && !(c >= 3 && c <= 5)) continue;

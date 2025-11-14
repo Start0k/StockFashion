@@ -1,11 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:background="#ECFDF5">
+    android:background="#ECFDF5"
+    tools:context=".verStock">
 
     <!-- Header -->
     <LinearLayout
@@ -13,9 +15,12 @@
         android:layout_height="wrap_content"
         android:background="#10B981"
         android:padding="16dp"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        android:elevation="4dp">
 
         <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:text="StockFashion"
             android:textColor="#FFFFFF"
             android:textSize="20sp"
@@ -23,6 +28,8 @@
             android:layout_gravity="center"/>
 
         <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:text="Gestión de inventario"
             android:textColor="#D1FAE5"
             android:textSize="14sp"
@@ -30,30 +37,39 @@
     </LinearLayout>
 
     <!-- Buscador -->
-    <LinearLayout
+    <!-- Buscador -->
+    <com.google.android.material.card.MaterialCardView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:background="#FFFFFF"
-        android:padding="8dp"
-        android:elevation="2dp"
+        app:cardCornerRadius="8dp"
+        app:cardElevation="2dp"
         android:layout_margin="12dp">
 
-        <ImageView
-            android:layout_width="24dp"
-            android:layout_height="24dp"
-            android:tint="#10B981"
-
-            android:layout_gravity="center_vertical"/>
-
-        <EditText
-            android:id="@+id/etSearch"
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Buscar por nombre..."
-            android:padding="8dp"
-            android:layout_marginStart="8dp"/>
-    </LinearLayout>
+            android:orientation="horizontal"
+            android:padding="8dp">
+
+            <!-- CORRECCIÓN AQUÍ -->
+            <ImageView
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:src="@drawable/outline_search_24"
+                app:tint="#10B981"
+                android:layout_gravity="center_vertical"/>
+
+            <EditText
+                android:id="@+id/etSearch"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Buscar por nombre..."
+                android:padding="8dp"
+                android:background="@android:color/transparent"
+                android:layout_marginStart="8dp"/>
+        </LinearLayout>
+    </com.google.android.material.card.MaterialCardView>
+
 
     <!-- Filtros -->
     <LinearLayout
@@ -63,6 +79,8 @@
         android:orientation="vertical">
 
         <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:text="Filtros"
             android:textColor="#065F46"
             android:textStyle="bold"
@@ -71,29 +89,30 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:weightSum="3"
-            android:gravity="center">
+            android:orientation="horizontal">
 
             <Spinner
                 android:id="@+id/spBrand"
                 android:layout_width="0dp"
-                android:layout_height="wrap_content"
+                android:layout_height="48dp"
                 android:layout_weight="1"
-                android:layout_marginEnd="4dp"/>
+                android:layout_marginEnd="4dp"
+                android:background="@drawable/spinner_background"/>
 
             <Spinner
                 android:id="@+id/spType"
                 android:layout_width="0dp"
-                android:layout_height="wrap_content"
+                android:layout_height="48dp"
                 android:layout_weight="1"
-                android:layout_marginEnd="4dp"/>
+                android:layout_marginEnd="4dp"
+                android:background="@drawable/spinner_background"/>
 
             <Spinner
                 android:id="@+id/spSize"
                 android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"/>
+                android:layout_height="48dp"
+                android:layout_weight="1"
+                android:background="@drawable/spinner_background"/>
         </LinearLayout>
     </LinearLayout>
 
@@ -103,27 +122,34 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        android:padding="12dp"
-        android:gravity="center_vertical">
+        android:paddingHorizontal="16dp"
+        android:paddingVertical="8dp">
 
         <TextView
             android:id="@+id/tvCount"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
             android:text="Productos: 0"
             android:textColor="#065F46"/>
 
         <TextView
             android:id="@+id/tvTotal"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:text="Unidades: 0"
+            android:gravity="end"
             android:textColor="#065F46"/>
     </LinearLayout>
 
     <!-- Lista -->
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/rvProducts"
+        android:id="@+id/tblVerStock"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1"
-        android:padding="12dp"
-        android:clipToPadding="false"/>
+        android:paddingHorizontal="4dp"
+        android:clipToPadding="false"
+        tools:listitem="@layout/item_producto_gestion"/>
 
 </LinearLayout>

@@ -32,9 +32,6 @@ public class LogActivity extends AppCompatActivity {
 
     private static final String TAG = "EmailPassword";
 
-
-
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -78,24 +75,40 @@ public class LogActivity extends AppCompatActivity {
     private void ingresar(String email, String password){
         oFirebaseAuth.signInWithEmailAndPassword(email, password)
                 .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
+                    // ... dentro del método ingresar()
+
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
-                        if (task.isSuccessful()
-                        ){
+                        if (task.isSuccessful()) {
+
+
                             Log.d(TAG, "SignInWithEmail:success");
                             FirebaseUser user = oFirebaseAuth.getCurrentUser();
-                            updateUI(user);
+                            // updateUI(user); // Puedes llamar a este método si lo necesitas
+
+                            //Crea el Intent con el nombre correcto de la clase
                             Intent intent = new Intent(LogActivity.this, menu.class);
 
-                        }else{
+                            //Ejecuta el Intent para cambiar de actividad
+                            startActivity(intent);
+
+                            //Finaliza la actividad de Login
+                            finish();
+
+
+
+                        } else {
                             Log.w(TAG, "signInWithEmail:failure", task.getException());
                             Toast.makeText(LogActivity.this, "Correo o contraseña incorrectos", Toast.LENGTH_SHORT).show();
-                            updateUI(null);
-
+                            // updateUI(null);
                         }
                     }
+
+// ... resto del código
+
                 });
     }
+
 
     @Override
     public void onStart(){

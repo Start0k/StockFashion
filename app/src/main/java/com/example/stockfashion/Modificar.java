@@ -42,7 +42,7 @@ public class Modificar extends AppCompatActivity {
             return insets;
         });
 
-        // 1) Referencias a la vista
+        // Referencias a la vista
         etSearch    = findViewById(R.id.etSearch);
         spMarca     = findViewById(R.id.spMarca);
         spTipo      = findViewById(R.id.spTipo);
@@ -52,17 +52,17 @@ public class Modificar extends AppCompatActivity {
 
         rvProductos.setLayoutManager(new LinearLayoutManager(this));
 
-        // 2) Datos de prueba
+        // Datos de prueba
         cargarDatosDummy();
 
-        // 3) Llenar spinners dinámicamente según datos
+        //  Llenar spinners dinámicamente según datos
         configurarSpinners();
 
-        // 4) Configurar RecyclerView
+        //  Configurar RecyclerView
         adapter = new ProductoAdapter(listaFiltrada);
         rvProductos.setAdapter(adapter);
 
-        // 5) Listeners de búsqueda
+        //  Listeners de búsqueda
         etSearch.addTextChangedListener(new TextWatcher() {
             @Override public void beforeTextChanged(CharSequence s, int start, int count, int after) { }
             @Override public void onTextChanged(CharSequence s, int start, int before, int count) {
@@ -71,7 +71,7 @@ public class Modificar extends AppCompatActivity {
             @Override public void afterTextChanged(Editable s) { }
         });
 
-        // 6) Listeners de filtros
+        //  Listeners de filtros
         spMarca.setOnItemSelectedListener(new SimpleOnItemSelectedListener(() -> filtrarLista()));
         spTipo.setOnItemSelectedListener(new SimpleOnItemSelectedListener(() -> filtrarLista()));
         spTalla.setOnItemSelectedListener(new SimpleOnItemSelectedListener(() -> filtrarLista()));
@@ -82,15 +82,15 @@ public class Modificar extends AppCompatActivity {
     }
 
     private void cargarDatosDummy() {
-        // Aquí tú luego reemplazas por datos desde BD
+        // Reemplaza los números por su equivalente en Long añadiendo una 'L'
         listaOriginal.clear();
-        listaOriginal.add(new Producto("Polera básica negra", "Nike",  "Polera", "M", 10));
-        listaOriginal.add(new Producto("Polera oversized blanca", "Adidas", "Polera", "L", 5));
-        listaOriginal.add(new Producto("Jeans skinny azul", "Levis", "Pantalón", "38", 3));
-        listaOriginal.add(new Producto("Vestido flores", "Zara", "Vestido", "S", 2));
-        listaOriginal.add(new Producto("Chaqueta cuero", "H&M", "Chaqueta", "M", 1));
-        listaOriginal.add(new Producto("Polera estampada", "Nike", "Polera", "S", 8));
-        listaOriginal.add(new Producto("Pantalón cargo", "Adidas", "Pantalón", "40", 6));
+        listaOriginal.add(new Producto("Polera básica negra", "Nike",  "Polera", "M", 10L));
+        listaOriginal.add(new Producto("Polera oversized blanca", "Adidas", "Polera", "L", 5L));
+        listaOriginal.add(new Producto("Jeans skinny azul", "Levis", "Pantalón", "38", 3L));
+        listaOriginal.add(new Producto("Vestido flores", "Zara", "Vestido", "S", 2L));
+        listaOriginal.add(new Producto("Chaqueta cuero", "H&M", "Chaqueta", "M", 1L));
+        listaOriginal.add(new Producto("Polera estampada", "Nike", "Polera", "S", 8L));
+        listaOriginal.add(new Producto("Pantalón cargo", "Adidas", "Pantalón", "40", 6L));
 
         listaFiltrada.clear();
         listaFiltrada.addAll(listaOriginal);
@@ -175,12 +175,13 @@ public class Modificar extends AppCompatActivity {
             }
 
             // Filtro por talla
-            if (!tallaSel.equals("Todas") && !p.getTalla().equals(tallaSel)) {
-                continue;
+            Long cantidadLong = p.getCantidad();
+            if (cantidadLong == null) {
+                continue; // Si no tiene cantidad, lo ignoramos en el filtro
             }
 
             // Filtro por cantidad (según rangos de ejemplo)
-            int c = p.getCantidad();
+            int c = cantidadLong.intValue();
             if (cantSel.equals("0 - 2") && !(c >= 0 && c <= 2)) continue;
             if (cantSel.equals("3 - 5") && !(c >= 3 && c <= 5)) continue;
             if (cantSel.equals("6+")     && c < 6) continue;

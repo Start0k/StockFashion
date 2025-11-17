@@ -72,42 +72,58 @@ public class LogActivity extends AppCompatActivity {
     }
 
 
-    private void ingresar(String email, String password){
+    private void ingresar(String email, String password) {
+
+        if (email.isEmpty() || password.isEmpty()) {
+            Toast.makeText(LogActivity.this, "Por favor, ingrese correo y contraseña.", Toast.LENGTH_SHORT).show();
+            return;
+        }
+
         oFirebaseAuth.signInWithEmailAndPassword(email, password)
                 .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
-
-
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if (task.isSuccessful()) {
-
-
-                            Log.d(TAG, "SignInWithEmail:success");
+                            Log.d(TAG, "signInWithEmail:success - Inicio de sesión exitoso.");
                             FirebaseUser user = oFirebaseAuth.getCurrentUser();
 
+                            if (user != null) {
+
+                                user.getIdToken(true)
+                                        .addOnCompleteListener(tokenTask -> {
+                                            if (tokenTask.isSuccessful()) {
+
+                                                String rol = "usuario"; // Rol por defecto si no se encuentra un claim.
+                                                if (tokenTask.getResult().getClaims().get("rol") != null) {
+                                                    rol = tokenTask.getResult().getClaims().get("rol").toString();
+                                                }
+
+                                                Log.d(TAG, "Usuario tiene el rol: " + rol);
 
 
-                            Intent intent = new Intent(LogActivity.this, menu.class);
+                                                Intent intent = new Intent(LogActivity.this, menu.class);
 
 
-                            startActivity(intent);
+                                                intent.putExtra("ROL_USUARIO", rol);
 
 
-                            finish();
+                                                startActivity(intent);
+                                                finish();
 
-
-
+                                            } else {
+                                                Log.w(TAG, "Error al obtener el token y los claims:", tokenTask.getException());
+                                                Toast.makeText(LogActivity.this, "No se pudieron verificar los permisos. Intente de nuevo.", Toast.LENGTH_SHORT).show();
+                                            }
+                                        });
+                            }
                         } else {
                             Log.w(TAG, "signInWithEmail:failure", task.getException());
-                            Toast.makeText(LogActivity.this, "Correo o contraseña incorrectos", Toast.LENGTH_SHORT).show();
-
+                            Toast.makeText(LogActivity.this, "Correo o contraseña incorrectos.", Toast.LENGTH_SHORT).show();
                         }
                     }
-
-
-
                 });
     }
+
 
 
     @Override

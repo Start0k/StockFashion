@@ -2,55 +2,99 @@ package com.example.stockfashion;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.widget.Toast;
-
-import androidx.activity.EdgeToEdge;
+import android.util.Log;
+import android.view.View;
+import android.widget.Button;
+import android.widget.Toast; // Asegúrate de tener esta importación para el Toast de diagnóstico
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.graphics.Insets;
-import androidx.core.view.ViewCompat;
-import androidx.core.view.WindowInsetsCompat;
 
 import com.google.android.material.card.MaterialCardView;
+import com.google.firebase.auth.FirebaseAuth;
 
 public class menu extends AppCompatActivity {
+
+    private static final String TAG = "MenuActivity";
+
+    // Vistas
+    private MaterialCardView cardIngreso, cardStock, cardModificar, cardDespacho;
+    private Button btnCrearUsuario;
+    private Button btnCerrarSesion;
+
+    // Firebase
+    private FirebaseAuth mAuth;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        EdgeToEdge.enable(this);
-        setContentView(R.layout.activity_menu);
+        setContentView(R.layout.activity_menu); // Esto carga el layout activity_menu.xml
 
-        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
-            Insets bars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
-            v.setPadding(bars.left, bars.top, bars.right, bars.bottom);
-            return insets;
-        });
+        mAuth = FirebaseAuth.getInstance();
 
-        MaterialCardView cardIngreso   = findViewById(R.id.cardIngreso);
-        MaterialCardView cardStock     = findViewById(R.id.cardStock);
-        MaterialCardView cardModificar = findViewById(R.id.cardModificar);
-        MaterialCardView cardDespacho  = findViewById(R.id.cardDespacho);
+        // ======================= SECCIÓN CRÍTICA =======================
+        // Enlazar las vistas. Los IDs deben coincidir EXACTAMENTE con los de activity_menu.xml
+        try {
+            cardIngreso = findViewById(R.id.cardIngreso);
+            cardStock = findViewById(R.id.cardStock);
+            cardModificar = findViewById(R.id.cardModificar);
+            cardDespacho = findViewById(R.id.cardDespacho);
+            btnCrearUsuario = findViewById(R.id.btnCrearUsuario);
+            btnCerrarSesion = findViewById(R.id.btnCerrarSesion);
+        } catch (Exception e) {
+            Log.e(TAG, "Error al enlazar las vistas. Verifica los IDs en activity_menu.xml", e);
+            // Si hay un error aquí, la app crasheará más adelante. Este log ayuda a identificarlo.
+        }
+        // ================================================================
 
-        cardIngreso.setOnClickListener(v -> {
-                    startActivity(new Intent(this, Ingreso.class));
-                }
-        );
+        // Configurar los clics
+        configurarListeners();
 
-        cardStock.setOnClickListener(v -> {
-                    startActivity(new Intent(this, verStock.class));
-                }
-        );
+        // Lógica de roles
+        String rolUsuario = getIntent().getStringExtra("ROL_USUARIO");
 
-        cardModificar.setOnClickListener(v -> {
-                    startActivity(new Intent(this, Modificar.class));
-                }
-        );
+        if (rolUsuario == null) {
+            rolUsuario = "usuario";
+            Log.w(TAG, "No se recibió el rol, se asignó 'usuario' por defecto.");
+        }
 
-        cardDespacho.setOnClickListener(v -> {
-
-                }
-        );
+        // Toast para diagnóstico
+        Toast.makeText(this, "Rol recibido: " + rolUsuario, Toast.LENGTH_LONG).show();
 
 
+        ajustarVisibilidadPorRol(rolUsuario);
+    }
+
+    private void configurarListeners() {
+        // Solo añade listeners si las vistas no son nulas para evitar otro crash
+        if (cardIngreso != null) cardIngreso.setOnClickListener(v -> startActivity(new Intent(menu.this, Ingreso.class)));
+        if (cardStock != null) cardStock.setOnClickListener(v -> startActivity(new Intent(menu.this, verStock.class)));
+        if (btnCrearUsuario != null) btnCrearUsuario.setOnClickListener(v -> startActivity(new Intent(menu.this, RegActivity.class)));
+
+        if (btnCerrarSesion != null) {
+            btnCerrarSesion.setOnClickListener(v -> {
+                mAuth.signOut();
+                Intent intent = new Intent(menu.this, LogActivity.class);
+                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                startActivity(intent);
+                finish();
+            });
+        }
+    }
+
+    private void ajustarVisibilidadPorRol(String rol) {
+        if ("administrador".equals(rol)) {
+            Log.d(TAG, "Usuario es Administrador. Mostrando todas las opciones.");
+            cardIngreso.setVisibility(View.VISIBLE);
+            cardStock.setVisibility(View.VISIBLE);
+            cardModificar.setVisibility(View.VISIBLE);
+            cardDespacho.setVisibility(View.VISIBLE);
+            btnCrearUsuario.setVisibility(View.VISIBLE);
+        } else { // Rol "usuario"
+            Log.d(TAG, "Usuario es estándar. Ocultando opciones de administrador.");
+            cardIngreso.setVisibility(View.GONE);
+            cardModificar.setVisibility(View.GONE);
+            btnCrearUsuario.setVisibility(View.GONE);
+            cardStock.setVisibility(View.VISIBLE);
+            cardDespacho.setVisibility(View.VISIBLE);
+        }
     }
 }

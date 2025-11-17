@@ -10,9 +10,9 @@
               <option name="connection">
                 <ConnectionSetting>
                   <option name="appId" value="com.example.stockfashion" />
-                  <option name="mobileSdkAppId" value="1:720220860507:android:98f3275e105dd31a1dcf7e" />
-                  <option name="projectId" value="bd11-8b1bf" />
-                  <option name="projectNumber" value="720220860507" />
+                  <option name="mobileSdkAppId" value="1:942748629560:android:1837b9322e4f5aa5d0c4cd" />
+                  <option name="projectId" value="speedrun-ff14e" />
+                  <option name="projectNumber" value="942748629560" />
                 </ConnectionSetting>
               </option>
               <option name="signal" value="SIGNAL_UNSPECIFIED" />

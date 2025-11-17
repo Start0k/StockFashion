@@ -1,238 +1,278 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     android:background="#F9FAFB">
 
-    <LinearLayout
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:padding="24dp">
+        android:layout_height="0dp"
+        android:layout_weight="1">
 
-        <!-- Header -->
-        <TextView
-            android:id="@+id/tvTitle"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="StockFashion"
-            android:textColor="#111827"
-            android:textStyle="bold"
-            android:textSize="22sp"/>
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Gestión de inventario"
-            android:textColor="#6B7280"
-            android:layout_marginTop="4dp"/>
-
-        <!-- Menú -->
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            android:layout_marginTop="24dp"
-            android:divider="?android:attr/dividerHorizontal"
-            android:showDividers="none"
-            android:dividerPadding="0dp">
+            android:padding="24dp">
 
-            <!-- Ingreso de Ropa -->
-            <com.google.android.material.card.MaterialCardView
-                android:id="@+id/cardIngreso"
+            <!-- Header -->
+            <TextView
+                android:id="@+id/tvTitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="StockFashion"
+                android:textColor="#111827"
+                android:textStyle="bold"
+                android:textSize="22sp"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Gestión de inventario"
+                android:textColor="#6B7280"
+                android:layout_marginTop="4dp"/>
+
+            <!-- Menú de tarjetas -->
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="12dp"
-                app:cardBackgroundColor="#EFF6FF"
-                app:cardCornerRadius="16dp"
-                app:strokeColor="#BFDBFE"
-                app:strokeWidth="1dp"
-                app:cardUseCompatPadding="true">
+                android:orientation="vertical"
+                android:layout_marginTop="24dp">
 
-                <LinearLayout
+                <!-- Ingreso de Ropa -->
+                <com.google.android.material.card.MaterialCardView
+                    android:id="@+id/cardIngreso"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    android:padding="16dp"
-                    android:gravity="center_vertical">
-
-                    <ImageView
-                        android:layout_width="28dp"
-                        android:layout_height="28dp"
-
-                        android:contentDescription="@string/app_name"
-                        />
+                    android:layout_marginBottom="12dp"
+                    app:cardBackgroundColor="#EFF6FF"
+                    app:cardCornerRadius="16dp"
+                    app:strokeColor="#BFDBFE"
+                    app:strokeWidth="1dp">
 
                     <LinearLayout
-                        android:layout_width="0dp"
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:orientation="vertical"
-                        android:layout_marginStart="12dp">
+                        android:orientation="horizontal"
+                        android:padding="16dp"
+                        android:gravity="center_vertical">
 
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="Ingreso de Ropa"
-                            android:textColor="#1F2937"
-                            android:textStyle="bold"/>
+                        <ImageView
+                            android:layout_width="28dp"
+                            android:layout_height="28dp"
+                            android:src="@drawable/outline_add_24"
+                            app:tint="#2563EB"
+                            android:contentDescription="@string/app_name" />
 
-                        <TextView
-                            android:layout_width="wrap_content"
+                        <LinearLayout
+                            android:layout_width="0dp"
                             android:layout_height="wrap_content"
-                            android:text="Agregar nuevos productos al inventario"
-                            android:textColor="#2563EB"/>
+                            android:layout_weight="1"
+                            android:orientation="vertical"
+                            android:layout_marginStart="12dp">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="Ingreso de Ropa"
+                                android:textColor="#1F2937"
+                                android:textStyle="bold"/>
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="Agregar nuevos productos al inventario"
+                                android:textColor="#2563EB"/>
+                        </LinearLayout>
                     </LinearLayout>
-                </LinearLayout>
-            </com.google.android.material.card.MaterialCardView>
+                </com.google.android.material.card.MaterialCardView>
 
-            <!-- Ver Stock -->
-            <com.google.android.material.card.MaterialCardView
-                android:id="@+id/cardStock"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="12dp"
-                app:cardBackgroundColor="#ECFDF5"
-                app:cardCornerRadius="16dp"
-                app:strokeColor="#A7F3D0"
-                app:strokeWidth="1dp"
-                app:cardUseCompatPadding="true">
-
-                <LinearLayout
+                <!-- Ver Stock -->
+                <com.google.android.material.card.MaterialCardView
+                    android:id="@+id/cardStock"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    android:padding="16dp"
-                    android:gravity="center_vertical">
-
-                    <ImageView
-                        android:layout_width="28dp"
-                        android:layout_height="28dp"
-
-                        android:contentDescription="@string/app_name"
-                        />
+                    android:layout_marginBottom="12dp"
+                    app:cardBackgroundColor="#ECFDF5"
+                    app:cardCornerRadius="16dp"
+                    app:strokeColor="#A7F3D0"
+                    app:strokeWidth="1dp">
 
                     <LinearLayout
-                        android:layout_width="0dp"
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:orientation="vertical"
-                        android:layout_marginStart="12dp">
+                        android:orientation="horizontal"
+                        android:padding="16dp"
+                        android:gravity="center_vertical">
 
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="Ver Stock"
-                            android:textColor="#1F2937"
-                            android:textStyle="bold"/>
+                        <ImageView
+                            android:layout_width="28dp"
+                            android:layout_height="28dp"
+                            android:src="@drawable/baseline_inventory_24"
+                            app:tint="#059669"
+                            android:contentDescription="@string/app_name" />
 
-                        <TextView
-                            android:layout_width="wrap_content"
+                        <LinearLayout
+                            android:layout_width="0dp"
                             android:layout_height="wrap_content"
-                            android:text="Consultar inventario disponible"
-                            android:textColor="#059669"/>
+                            android:layout_weight="1"
+                            android:orientation="vertical"
+                            android:layout_marginStart="12dp">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="Ver Stock"
+                                android:textColor="#1F2937"
+                                android:textStyle="bold"/>
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="Consultar inventario disponible"
+                                android:textColor="#059669"/>
+                        </LinearLayout>
                     </LinearLayout>
-                </LinearLayout>
-            </com.google.android.material.card.MaterialCardView>
+                </com.google.android.material.card.MaterialCardView>
 
-            <!-- Modificar -->
-            <com.google.android.material.card.MaterialCardView
-                android:id="@+id/cardModificar"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="12dp"
-                app:cardBackgroundColor="#F5F3FF"
-                app:cardCornerRadius="16dp"
-                app:strokeColor="#DDD6FE"
-                app:strokeWidth="1dp"
-                app:cardUseCompatPadding="true">
-
-                <LinearLayout
+                <!-- Modificar -->
+                <com.google.android.material.card.MaterialCardView
+                    android:id="@+id/cardModificar"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    android:padding="16dp"
-                    android:gravity="center_vertical">
-
-                    <ImageView
-                        android:layout_width="28dp"
-                        android:layout_height="28dp"
-
-                        android:contentDescription="@string/app_name"
-                        />
+                    android:layout_marginBottom="12dp"
+                    app:cardBackgroundColor="#F5F3FF"
+                    app:cardCornerRadius="16dp"
+                    app:strokeColor="#DDD6FE"
+                    app:strokeWidth="1dp">
 
                     <LinearLayout
-                        android:layout_width="0dp"
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:orientation="vertical"
-                        android:layout_marginStart="12dp">
+                        android:orientation="horizontal"
+                        android:padding="16dp"
+                        android:gravity="center_vertical">
 
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="Modificar"
-                            android:textColor="#1F2937"
-                            android:textStyle="bold"/>
+                        <ImageView
+                            android:layout_width="28dp"
+                            android:layout_height="28dp"
+                            android:src="@drawable/baseline_mode_edit_24"
+                            app:tint="#7C3AED"
+                            android:contentDescription="@string/app_name" />
 
-                        <TextView
-                            android:layout_width="wrap_content"
+                        <LinearLayout
+                            android:layout_width="0dp"
                             android:layout_height="wrap_content"
-                            android:text="Editar productos existentes"
-                            android:textColor="#7C3AED"/>
+                            android:layout_weight="1"
+                            android:orientation="vertical"
+                            android:layout_marginStart="12dp">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="Modificar"
+                                android:textColor="#1F2937"
+                                android:textStyle="bold"/>
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="Editar productos existentes"
+                                android:textColor="#7C3AED"/>
+                        </LinearLayout>
                     </LinearLayout>
-                </LinearLayout>
-            </com.google.android.material.card.MaterialCardView>
+                </com.google.android.material.card.MaterialCardView>
 
-            <!-- Orden de Despacho -->
-            <com.google.android.material.card.MaterialCardView
-                android:id="@+id/cardDespacho"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                app:cardBackgroundColor="#FFF7ED"
-                app:cardCornerRadius="16dp"
-                app:strokeColor="#FED7AA"
-                app:strokeWidth="1dp"
-                app:cardUseCompatPadding="true">
-
-                <LinearLayout
+                <!-- Orden de Despacho -->
+                <com.google.android.material.card.MaterialCardView
+                    android:id="@+id/cardDespacho"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    android:padding="16dp"
-                    android:gravity="center_vertical">
-
-                    <ImageView
-                        android:layout_width="28dp"
-                        android:layout_height="28dp"
-                        android:contentDescription="@string/app_name"
-                        />
+                    app:cardBackgroundColor="#FFF7ED"
+                    app:cardCornerRadius="16dp"
+                    app:strokeColor="#FED7AA"
+                    app:strokeWidth="1dp">
 
                     <LinearLayout
-                        android:layout_width="0dp"
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:orientation="vertical"
-                        android:layout_marginStart="12dp">
+                        android:orientation="horizontal"
+                        android:padding="16dp"
+                        android:gravity="center_vertical">
 
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="Orden de Despacho"
-                            android:textColor="#1F2937"
-                            android:textStyle="bold"/>
+                        <ImageView
+                            android:layout_width="28dp"
+                            android:layout_height="28dp"
+                            android:src="@drawable/outline_delivery_truck_speed_24"
+                            app:tint="#EA580C"
+                            android:contentDescription="@string/app_name" />
 
-                        <TextView
-                            android:layout_width="wrap_content"
+                        <LinearLayout
+                            android:layout_width="0dp"
                             android:layout_height="wrap_content"
-                            android:text="Gestionar pedidos y envíos"
-                            android:textColor="#EA580C"/>
+                            android:layout_weight="1"
+                            android:orientation="vertical"
+                            android:layout_marginStart="12dp">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="Orden de Despacho"
+                                android:textColor="#1F2937"
+                                android:textStyle="bold"/>
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="Gestionar pedidos y envíos"
+                                android:textColor="#EA580C"/>
+                        </LinearLayout>
                     </LinearLayout>
-                </LinearLayout>
-            </com.google.android.material.card.MaterialCardView>
+                </com.google.android.material.card.MaterialCardView>
 
-        </LinearLayout>
+            </LinearLayout> <!-- Fin del LinearLayout de las tarjetas -->
+
+        </LinearLayout> <!-- Fin del LinearLayout del contenido principal -->
+
+    </ScrollView> <!-- Fin del ScrollView -->
+
+
+    <!-- ====== BOTONES AÑADIDOS FUERA DEL SCROLLVIEW ====== -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:paddingStart="24dp"
+        android:paddingEnd="24dp"
+        android:paddingBottom="16dp"
+        android:paddingTop="8dp"
+        android:background="#F9FAFB">
+
+        <!-- Botón visible solo para administradores -->
+        <Button
+            android:id="@+id/btnCrearUsuario"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:backgroundTint="#10B981"
+            android:text="Crear Nuevo Usuario"
+            android:textColor="@android:color/white"
+            android:visibility="gone"
+            tools:visibility="visible" />
+
+        <!-- Botón de Cerrar Sesión -->
+        <Button
+            android:id="@+id/btnCerrarSesion"
+            style="@style/Widget.Material3.Button.OutlinedButton"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:text="Cerrar Sesión"
+            android:textColor="#EF4444"
+            app:strokeColor="#EF4444" />
     </LinearLayout>
-</ScrollView>
+
+</LinearLayout>

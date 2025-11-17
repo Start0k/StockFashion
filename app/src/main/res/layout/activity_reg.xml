@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/main"
     android:fillViewport="true"
     android:background="@android:color/white"
@@ -30,7 +31,6 @@
                     android:layout_width="28dp"
                     android:layout_height="28dp"
                     android:layout_gravity="center"
-
                     android:src="@drawable/outline_checkroom_24" />
             </FrameLayout>
 
@@ -57,7 +57,7 @@
             android:layout_height="wrap_content">
 
             <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/inputNombre"
+                android:id="@+id/txtRegNombre"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="Nombre completo"
@@ -72,7 +72,7 @@
             android:layout_height="wrap_content">
 
             <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/inputRut"
+                android:id="@+id/txtRegRut"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="RUT (12.345.678-9)"
@@ -88,7 +88,7 @@
             android:layout_height="wrap_content">
 
             <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/inputTelefono"
+                android:id="@+id/txtRegTelefono"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="Teléfono (+56 9 1234 5678)"
@@ -103,11 +103,11 @@
             android:layout_height="wrap_content">
 
             <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/inputCorreo"
+                android:id="@+id/txtRegCorreo"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="Correo electrónico"
-                android:inputType="textEmailAddress"/>
+                android_inputType="textEmailAddress"/>
         </com.google.android.material.textfield.TextInputLayout>
 
         <!-- Contraseña (con icono mostrar/ocultar) -->
@@ -119,12 +119,22 @@
             app:endIconMode="password_toggle">
 
             <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/inputPassword"
+                android:id="@+id/txtRegPass"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="Contraseña (mínimo 8 caracteres)"
                 android:inputType="textPassword"/>
         </com.google.android.material.textfield.TextInputLayout>
+
+        <!-- ===== CHECKBOX AÑADIDO AQUÍ ===== -->
+        <CheckBox
+            android:id="@+id/cbEsAdmin"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:text="¿Registrar como Administrador?"
+            android:textColor="#333333"/>
+        <!-- =================================== -->
 
         <!-- Botón crear cuenta -->
         <Button
@@ -138,27 +148,28 @@
 
         <!-- Link Iniciar sesión -->
         <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
             android:layout_marginTop="12dp"
             android:gravity="center"
-            android:orientation="horizontal"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:orientation="horizontal">
 
             <TextView
-                android:text="¿Ya tienes cuenta? "
-                android:textColor="#99000000"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"/>
+                android:layout_height="wrap_content"
+                android:text="¿Ya tienes cuenta? "
+                android:textColor="#99000000" />
 
             <TextView
                 android:id="@+id/tvIrLogin"
-                android:text="Inicia sesión"
-                android:textStyle="bold"
-                android:textColor="#000000"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
                 android:clickable="true"
                 android:focusable="true"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"/>
+                android:text="Inicia sesión"
+                android:textColor="#000000"
+                android:textStyle="bold"
+                tools:ignore="TouchTargetSizeCheck" />
         </LinearLayout>
 
     </LinearLayout>

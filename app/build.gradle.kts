@@ -11,7 +11,7 @@ android {
     compileSdk = 36
 
     defaultConfig {
-        applicationId = "com.example.stockfashion"
+        applicationId = "com.HanDav.stockfashion"
         minSdk = 25
         targetSdk = 36
         versionCode = 1

@@ -1,4 +1,4 @@
-package com.example.stockfashion;
+package com.HanDav.stockfashion;
 
 import android.content.Intent;
 import android.os.Bundle;

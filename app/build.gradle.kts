@@ -7,7 +7,7 @@ plugins {
 }
 
 android {
-    namespace = "com.example.stockfashion"
+    namespace = "com.HanDav.stockfashion"
     compileSdk = 36
 
     defaultConfig {

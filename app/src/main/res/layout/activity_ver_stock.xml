@@ -9,7 +9,7 @@
     android:background="#ECFDF5"
     tools:context=".verStock">
 
-    <!-- Header -->
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -36,8 +36,7 @@
             android:layout_gravity="center"/>
     </LinearLayout>
 
-    <!-- Buscador -->
-    <!-- Buscador -->
+
     <com.google.android.material.card.MaterialCardView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -51,7 +50,7 @@
             android:orientation="horizontal"
             android:padding="8dp">
 
-            <!-- CORRECCIÓN AQUÍ -->
+
             <ImageView
                 android:layout_width="24dp"
                 android:layout_height="24dp"
@@ -71,7 +70,7 @@
     </com.google.android.material.card.MaterialCardView>
 
 
-    <!-- Filtros -->
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -116,7 +115,6 @@
         </LinearLayout>
     </LinearLayout>
 
-    <!-- Estadísticas -->
     <LinearLayout
         android:id="@+id/layoutStats"
         android:layout_width="match_parent"
@@ -142,7 +140,7 @@
             android:textColor="#065F46"/>
     </LinearLayout>
 
-    <!-- Lista -->
+
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/tblVerStock"
         android:layout_width="match_parent"

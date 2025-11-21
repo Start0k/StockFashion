@@ -26,12 +26,11 @@ public class menu extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_menu); // Esto carga el layout activity_menu.xml
+        setContentView(R.layout.activity_menu);
 
         mAuth = FirebaseAuth.getInstance();
 
-        // ======================= SECCIÓN CRÍTICA =======================
-        // Enlazar las vistas. Los IDs deben coincidir EXACTAMENTE con los de activity_menu.xml
+
         try {
             cardIngreso = findViewById(R.id.cardIngreso);
             cardStock = findViewById(R.id.cardStock);
@@ -41,11 +40,11 @@ public class menu extends AppCompatActivity {
             btnCerrarSesion = findViewById(R.id.btnCerrarSesion);
         } catch (Exception e) {
             Log.e(TAG, "Error al enlazar las vistas. Verifica los IDs en activity_menu.xml", e);
-            // Si hay un error aquí, la app crasheará más adelante. Este log ayuda a identificarlo.
-        }
-        // ================================================================
 
-        // Configurar los clics
+        }
+
+
+
         configurarListeners();
 
         // Lógica de roles
@@ -64,7 +63,7 @@ public class menu extends AppCompatActivity {
     }
 
     private void configurarListeners() {
-        // Solo añade listeners si las vistas no son nulas para evitar otro crash
+
         if (cardIngreso != null) cardIngreso.setOnClickListener(v -> startActivity(new Intent(menu.this, Ingreso.class)));
         if (cardStock != null) cardStock.setOnClickListener(v -> startActivity(new Intent(menu.this, verStock.class)));
         if (btnCrearUsuario != null) btnCrearUsuario.setOnClickListener(v -> startActivity(new Intent(menu.this, RegActivity.class)));
@@ -90,9 +89,9 @@ public class menu extends AppCompatActivity {
             btnCrearUsuario.setVisibility(View.VISIBLE);
         } else { // Rol "usuario"
             Log.d(TAG, "Usuario es estándar. Ocultando opciones de administrador.");
-            cardIngreso.setVisibility(View.GONE);
-            cardModificar.setVisibility(View.GONE);
-            btnCrearUsuario.setVisibility(View.GONE);
+            cardIngreso.setVisibility(View.VISIBLE);
+            cardModificar.setVisibility(View.VISIBLE);
+            btnCrearUsuario.setVisibility(View.VISIBLE);
             cardStock.setVisibility(View.VISIBLE);
             cardDespacho.setVisibility(View.VISIBLE);
         }

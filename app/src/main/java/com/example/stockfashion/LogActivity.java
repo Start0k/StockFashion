@@ -93,7 +93,7 @@ public class LogActivity extends AppCompatActivity {
                                         .addOnCompleteListener(tokenTask -> {
                                             if (tokenTask.isSuccessful()) {
 
-                                                String rol = "usuario"; // Rol por defecto si no se encuentra un claim.
+                                                String rol = "usuario";
                                                 if (tokenTask.getResult().getClaims().get("rol") != null) {
                                                     rol = tokenTask.getResult().getClaims().get("rol").toString();
                                                 }

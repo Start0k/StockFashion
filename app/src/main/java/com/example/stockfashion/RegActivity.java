@@ -48,11 +48,10 @@ public class RegActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_reg);
 
-        // Inicializar Firebase
         mAuth = FirebaseAuth.getInstance();
         db = FirebaseFirestore.getInstance();
 
-        // Enlazar Vistas
+
         txtNombre = findViewById(R.id.txtRegNombre);
         txtRut = findViewById(R.id.txtRegRut);
         txtTelefono = findViewById(R.id.txtRegTelefono);
@@ -62,7 +61,7 @@ public class RegActivity extends AppCompatActivity {
         btnCrearCuenta = findViewById(R.id.btnCrearCuenta);
         tvIrLogin = findViewById(R.id.tvIrLogin);
 
-        // Configurar Listeners
+
         btnCrearCuenta.setOnClickListener(v -> intentarCrearCuenta());
         tvIrLogin.setOnClickListener(v -> startActivity(new Intent(RegActivity.this, LogActivity.class)));
     }
@@ -84,24 +83,22 @@ public class RegActivity extends AppCompatActivity {
             return;
         }
 
-        // Determinar el rol solicitado
+
         String rolSolicitado = cbEsAdmin.isChecked() ? "administrador" : "usuario";
 
-        // Crear objeto con los datos del nuevo usuario para pasarlo entre métodos
+
         Map<String, Object> nuevoUsuarioData = new HashMap<>();
         nuevoUsuarioData.put("nombre", nombre);
         nuevoUsuarioData.put("rut", rut);
         nuevoUsuarioData.put("telefono", telefono);
         nuevoUsuarioData.put("email", correo);
-        nuevoUsuarioData.put("rol", rolSolicitado); // El rol final puede cambiar
+        nuevoUsuarioData.put("rol", rolSolicitado);
         nuevoUsuarioData.put("fechaCreacion", FieldValue.serverTimestamp());
 
 
         if (cbEsAdmin.isChecked()) {
-            // Si se solicita ser admin, iniciar el flujo de autorización
             mostrarDialogoAutorizacion(correo, password, nuevoUsuarioData);
         } else {
-            // Si es un usuario normal, proceder directamente con la creación
             crearCuentaEnFirebase(correo, password, nuevoUsuarioData);
         }
     }
@@ -125,7 +122,7 @@ public class RegActivity extends AppCompatActivity {
                         return;
                     }
 
-                    // Iniciar sesión con las credenciales del admin para verificar
+
                     verificarCredencialesAdmin(adminCorreo, adminPass, correoNuevoUsuario, passNuevoUsuario, nuevoUsuarioData);
                 })
                 .setNegativeButton("Cancelar", (dialog, id) -> dialog.cancel());
@@ -135,28 +132,26 @@ public class RegActivity extends AppCompatActivity {
     }
 
     private void verificarCredencialesAdmin(String adminCorreo, String adminPass, String correoNuevo, String passNuevo, Map<String, Object> nuevoUsuarioData) {
-        // Usamos una instancia temporal de FirebaseAuth para no interferir con el estado de sesión actual
         FirebaseAuth tempAuth = FirebaseAuth.getInstance();
         tempAuth.signInWithEmailAndPassword(adminCorreo, adminPass)
                 .addOnCompleteListener(task -> {
                     if (task.isSuccessful()) {
-                        // Credenciales válidas. Ahora verificamos si el usuario es realmente un admin en Firestore.
                         FirebaseUser adminUser = Objects.requireNonNull(task.getResult()).getUser();
                         db.collection("usuarios").document(adminUser.getUid()).get()
                                 .addOnSuccessListener(documentSnapshot -> {
                                     if (documentSnapshot.exists() && "administrador".equals(documentSnapshot.getString("rol"))) {
-                                        // ¡Éxito! El usuario que autoriza es un admin.
+
                                         Toast.makeText(RegActivity.this, "Autorización concedida.", Toast.LENGTH_SHORT).show();
-                                        // Proceder a crear la nueva cuenta de administrador.
+
                                         crearCuentaEnFirebase(correoNuevo, passNuevo, nuevoUsuarioData);
                                     } else {
-                                        // El usuario existe pero no tiene el rol de admin.
+
                                         Toast.makeText(RegActivity.this, "Autorización denegada: El usuario no es administrador.", Toast.LENGTH_LONG).show();
                                     }
                                 })
                                 .addOnFailureListener(e -> Toast.makeText(RegActivity.this, "Error al verificar rol de administrador.", Toast.LENGTH_SHORT).show());
                     } else {
-                        // Credenciales de administrador incorrectas.
+
                         Toast.makeText(RegActivity.this, "Autorización denegada: Credenciales de administrador incorrectas.", Toast.LENGTH_LONG).show();
                     }
                 });
@@ -193,7 +188,7 @@ public class RegActivity extends AppCompatActivity {
 
                     mAuth.signOut();
 
-                    // Redirigir al usuario a la pantalla de Login
+
                     Intent intent = new Intent(RegActivity.this, LogActivity.class);
                     intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                     startActivity(intent);

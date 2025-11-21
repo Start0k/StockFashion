@@ -14,7 +14,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
-        <!-- Logo / Header -->
+
         <LinearLayout
             android:gravity="center_horizontal"
             android:orientation="vertical"
@@ -50,7 +50,7 @@
                 android:layout_height="wrap_content"/>
         </LinearLayout>
 
-        <!-- Nombre -->
+
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/tilNombre"
             android:layout_width="match_parent"
@@ -64,7 +64,7 @@
                 android:inputType="textPersonName"/>
         </com.google.android.material.textfield.TextInputLayout>
 
-        <!-- RUT -->
+
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/tilRut"
             android:layout_marginTop="12dp"
@@ -80,7 +80,7 @@
                 android:inputType="text"/>
         </com.google.android.material.textfield.TextInputLayout>
 
-        <!-- Teléfono -->
+
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/tilTelefono"
             android:layout_marginTop="12dp"
@@ -95,7 +95,7 @@
                 android:inputType="phone"/>
         </com.google.android.material.textfield.TextInputLayout>
 
-        <!-- Correo -->
+
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/tilCorreo"
             android:layout_marginTop="12dp"
@@ -110,7 +110,7 @@
                 android_inputType="textEmailAddress"/>
         </com.google.android.material.textfield.TextInputLayout>
 
-        <!-- Contraseña (con icono mostrar/ocultar) -->
+
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/tilPassword"
             android:layout_marginTop="12dp"
@@ -126,7 +126,7 @@
                 android:inputType="textPassword"/>
         </com.google.android.material.textfield.TextInputLayout>
 
-        <!-- ===== CHECKBOX AÑADIDO AQUÍ ===== -->
+
         <CheckBox
             android:id="@+id/cbEsAdmin"
             android:layout_width="wrap_content"
@@ -134,9 +134,7 @@
             android:layout_marginTop="16dp"
             android:text="¿Registrar como Administrador?"
             android:textColor="#333333"/>
-        <!-- =================================== -->
 
-        <!-- Botón crear cuenta -->
         <Button
             android:id="@+id/btnCrearCuenta"
             android:layout_marginTop="20dp"
@@ -146,7 +144,7 @@
             android:textColor="@android:color/white"
             android:backgroundTint="#000000"/>
 
-        <!-- Link Iniciar sesión -->
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"

@@ -89,11 +89,11 @@ public class menu extends AppCompatActivity {
             btnCrearUsuario.setVisibility(View.VISIBLE);
         } else { // Rol "usuario"
             Log.d(TAG, "Usuario es estándar. Ocultando opciones de administrador.");
-            cardIngreso.setVisibility(View.VISIBLE);
-            cardModificar.setVisibility(View.VISIBLE);
-            btnCrearUsuario.setVisibility(View.VISIBLE);
+            cardIngreso.setVisibility(View.GONE);
+            cardModificar.setVisibility(View.GONE);
+            btnCrearUsuario.setVisibility(View.GONE);
             cardStock.setVisibility(View.VISIBLE);
-            cardDespacho.setVisibility(View.VISIBLE);
+            cardDespacho.setVisibility(View.GONE);
         }
     }
 }

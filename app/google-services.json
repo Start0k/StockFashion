@@ -7,9 +7,28 @@
   "client": [
     {
       "client_info": {
+        "mobilesdk_app_id": "1:942748629560:android:58800b3949d70c89d0c4cd",
+        "android_client_info": {
+          "package_name": "com.HanDav.stockfashion"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD04D7iWiWA6sZQuKGSPX1kj1b1JrunZjk"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    },
+    {
+      "client_info": {
         "mobilesdk_app_id": "1:942748629560:android:1837b9322e4f5aa5d0c4cd",
         "android_client_info": {
-          "package_name": "com.example.stockfashion"
+          "package_name": "com.example.stockFashion"
         }
       },
       "oauth_client": [],

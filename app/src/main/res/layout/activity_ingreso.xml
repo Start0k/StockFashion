@@ -7,7 +7,7 @@
     android:orientation="vertical"
     android:background="#FAFAFA">
 
-    <!-- Header -->
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -51,7 +51,7 @@
         </LinearLayout>
     </LinearLayout>
 
-    <!-- Contenido -->
+
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -63,7 +63,7 @@
             android:orientation="vertical"
             android:padding="16dp">
 
-            <!-- Formulario -->
+
             <EditText
                 android:id="@+id/etNombre"
                 android:hint="Nombre"
@@ -119,7 +119,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="48dp"/>
 
-            <!-- Lista -->
+
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/tblIngresoProductos"
                 android:layout_width="match_parent"

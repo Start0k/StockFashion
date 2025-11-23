@@ -19,7 +19,7 @@
             android:orientation="vertical"
             android:padding="24dp">
 
-            <!-- Header -->
+
             <TextView
                 android:id="@+id/tvTitle"
                 android:layout_width="wrap_content"
@@ -36,14 +36,14 @@
                 android:textColor="#6B7280"
                 android:layout_marginTop="4dp"/>
 
-            <!-- Menú de tarjetas -->
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
                 android:layout_marginTop="24dp">
 
-                <!-- Ingreso de Ropa -->
+
                 <com.google.android.material.card.MaterialCardView
                     android:id="@+id/cardIngreso"
                     android:layout_width="match_parent"
@@ -91,7 +91,7 @@
                     </LinearLayout>
                 </com.google.android.material.card.MaterialCardView>
 
-                <!-- Ver Stock -->
+
                 <com.google.android.material.card.MaterialCardView
                     android:id="@+id/cardStock"
                     android:layout_width="match_parent"
@@ -139,7 +139,7 @@
                     </LinearLayout>
                 </com.google.android.material.card.MaterialCardView>
 
-                <!-- Modificar -->
+
                 <com.google.android.material.card.MaterialCardView
                     android:id="@+id/cardModificar"
                     android:layout_width="match_parent"
@@ -187,7 +187,7 @@
                     </LinearLayout>
                 </com.google.android.material.card.MaterialCardView>
 
-                <!-- Orden de Despacho -->
+
                 <com.google.android.material.card.MaterialCardView
                     android:id="@+id/cardDespacho"
                     android:layout_width="match_parent"
@@ -234,14 +234,14 @@
                     </LinearLayout>
                 </com.google.android.material.card.MaterialCardView>
 
-            </LinearLayout> <!-- Fin del LinearLayout de las tarjetas -->
+            </LinearLayout>
 
-        </LinearLayout> <!-- Fin del LinearLayout del contenido principal -->
+        </LinearLayout>
 
-    </ScrollView> <!-- Fin del ScrollView -->
+    </ScrollView>
 
 
-    <!-- ====== BOTONES AÑADIDOS FUERA DEL SCROLLVIEW ====== -->
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -252,7 +252,6 @@
         android:paddingTop="8dp"
         android:background="#F9FAFB">
 
-        <!-- Botón visible solo para administradores -->
         <Button
             android:id="@+id/btnCrearUsuario"
             android:layout_width="match_parent"
@@ -263,7 +262,7 @@
             android:visibility="gone"
             tools:visibility="visible" />
 
-        <!-- Botón de Cerrar Sesión -->
+
         <Button
             android:id="@+id/btnCerrarSesion"
             style="@style/Widget.Material3.Button.OutlinedButton"

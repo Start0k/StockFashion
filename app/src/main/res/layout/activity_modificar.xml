@@ -6,7 +6,7 @@
     android:orientation="vertical"
     android:background="#FAFAFA">
 
-    <!-- HEADER -->
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -16,7 +16,7 @@
 
     </LinearLayout>
 
-    <!-- BÚSQUEDA -->
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -40,7 +40,7 @@
             android:layout_marginStart="8dp" />
     </LinearLayout>
 
-    <!-- FILTROS -->
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -63,7 +63,7 @@
             android:layout_weight="1"/>
     </LinearLayout>
 
-    <!-- LISTA -->
+
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rvProductos"
         android:layout_width="match_parent"

@@ -80,7 +80,7 @@ public class Ingreso extends AppCompatActivity {
 
     private void escucharCambiosProductos() {
         db.collection("productos")
-                .orderBy("nombre", Query.Direction.ASCENDING) // Opcional: ordenar alfabéticamente por nombre
+                .orderBy("nombre", Query.Direction.ASCENDING)
                 .addSnapshotListener((snapshots, e) -> {
 
                     if (e != null) {

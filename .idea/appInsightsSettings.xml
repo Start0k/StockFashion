@@ -9,8 +9,8 @@
             <InsightsFilterSettings>
               <option name="connection">
                 <ConnectionSetting>
-                  <option name="appId" value="com.example.stockfashion" />
-                  <option name="mobileSdkAppId" value="1:942748629560:android:1837b9322e4f5aa5d0c4cd" />
+                  <option name="appId" value="com.HanDav.stockfashion" />
+                  <option name="mobileSdkAppId" value="1:942748629560:android:58800b3949d70c89d0c4cd" />
                   <option name="projectId" value="speedrun-ff14e" />
                   <option name="projectNumber" value="942748629560" />
                 </ConnectionSetting>

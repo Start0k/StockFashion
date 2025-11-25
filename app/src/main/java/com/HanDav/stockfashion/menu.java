@@ -5,11 +5,15 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
-import android.widget.Toast; // Asegúrate de tener esta importación para el Toast de diagnóstico
+import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.DocumentSnapshot;
+
 
 import com.google.android.material.card.MaterialCardView;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 
 public class menu extends AppCompatActivity {
 
@@ -19,6 +23,9 @@ public class menu extends AppCompatActivity {
     private MaterialCardView cardIngreso, cardStock, cardModificar, cardDespacho;
     private Button btnCrearUsuario;
     private Button btnCerrarSesion;
+
+    private android.widget.TextView tvTitle, tvSubtitle;
+
 
     // Firebase
     private FirebaseAuth mAuth;
@@ -32,6 +39,8 @@ public class menu extends AppCompatActivity {
 
 
         try {
+            tvTitle = findViewById(R.id.tvTitle);
+            tvSubtitle = findViewById(R.id.tvSubtitle);
             cardIngreso = findViewById(R.id.cardIngreso);
             cardStock = findViewById(R.id.cardStock);
             cardModificar = findViewById(R.id.cardModificar);
@@ -43,12 +52,60 @@ public class menu extends AppCompatActivity {
 
         }
 
+        // ... código anterior ...
+
+        FirebaseUser user = mAuth.getCurrentUser();
+        // Lógica de roles (recibido del Intent)
+        String rolUsuario = getIntent().getStringExtra("ROL_USUARIO");
+
+        if (user != null) {
+            Log.d(TAG, "Usuario actual: " + user.getEmail());
+
+            // INICIO DE LA MODIFICACIÓN PARA OBTENER EL NOMBRE REAL
+            FirebaseFirestore db = FirebaseFirestore.getInstance();
+
+            // Referencia temporal mientras carga
+            tvTitle.setText("Cargando...");
+            tvSubtitle.setText("acceso tipo: " + (rolUsuario != null ? rolUsuario : "Cargando..."));
+
+            // Consultamos la colección "usuarios" buscando el documento con la UID
+            db.collection("usuarios").document(user.getUid())
+                    .get()
+                    .addOnSuccessListener(documentSnapshot -> {
+                        if (documentSnapshot.exists()) {
+                            // Recuperamos el campo "nombre"
+                            String nombreReal = documentSnapshot.getString("nombre");
+
+                            // Validamos que no sea nulo
+                            if (nombreReal != null && !nombreReal.isEmpty()) {
+                                tvTitle.setText("Bienvenido, " + nombreReal);
+                            } else {
+                                // Si el campo "nombre" está vacío, usamos el del Auth o uno genérico
+                                String nombreAuth = user.getDisplayName();
+                                tvTitle.setText("Bienvenido, " + (nombreAuth != null ? nombreAuth : "Usuario"));
+                            }
+                        } else {
+                            Log.d(TAG, "El documento del usuario no existe en Firestore");
+                        }
+                    })
+                    .addOnFailureListener(e -> {
+                        Log.e(TAG, "Error al obtener datos del usuario", e);
+                        tvTitle.setText("Bienvenido, Usuario");
+                    });
+            // FIN DE LA MODIFICACIÓN
+
+        } else {
+            Log.d(TAG, "No hay usuario actual");
+            tvTitle.setText("StockFashion");
+            tvSubtitle.setText("Gestión de inventario");
+        }
+
+        // ... resto del código (configurarListeners, etc) ...
 
 
         configurarListeners();
 
-        // Lógica de roles
-        String rolUsuario = getIntent().getStringExtra("ROL_USUARIO");
+
 
         if (rolUsuario == null) {
             rolUsuario = "usuario";

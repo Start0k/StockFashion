@@ -99,12 +99,23 @@
             android:layout_width="match_parent"
             android:layout_height="48dp"/>
 
+        <Button
+            android:id="@+id/btnGoogleLogin"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Iniciar con Google"
+            android:backgroundTint="#DB4437"
+            android:textColor="#FFFFFF"
+            android:layout_marginTop="10dp"/>
+
+
         <ProgressBar
-            android:id="@+id/progress"
-            android:visibility="gone"
-            android:layout_marginTop="12dp"
+            android:id="@+id/progressBarLog"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"/>
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:visibility="gone" /> <!-- Oculto por defecto -->
+
 
 
     </LinearLayout>

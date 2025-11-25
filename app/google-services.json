@@ -12,7 +12,20 @@
           "package_name": "com.HanDav.stockfashion"
         }
       },
-      "oauth_client": [],
+      "oauth_client": [
+        {
+          "client_id": "942748629560-dahbsdj8tiokq5v7r529pcng8h7bbd25.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.HanDav.stockfashion",
+            "certificate_hash": "1cbc5e2c3d182499008146a08dbcd478156f3359"
+          }
+        },
+        {
+          "client_id": "942748629560-stu25m12vva3buvfc6uu9aqqcecqb18g.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
       "api_key": [
         {
           "current_key": "AIzaSyD04D7iWiWA6sZQuKGSPX1kj1b1JrunZjk"
@@ -20,26 +33,12 @@
       ],
       "services": {
         "appinvite_service": {
-          "other_platform_oauth_client": []
-        }
-      }
-    },
-    {
-      "client_info": {
-        "mobilesdk_app_id": "1:942748629560:android:1837b9322e4f5aa5d0c4cd",
-        "android_client_info": {
-          "package_name": "com.example.stockFashion"
-        }
-      },
-      "oauth_client": [],
-      "api_key": [
-        {
-          "current_key": "AIzaSyD04D7iWiWA6sZQuKGSPX1kj1b1JrunZjk"
-        }
-      ],
-      "services": {
-        "appinvite_service": {
-          "other_platform_oauth_client": []
+          "other_platform_oauth_client": [
+            {
+              "client_id": "942748629560-stu25m12vva3buvfc6uu9aqqcecqb18g.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
         }
       }
     }

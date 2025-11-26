@@ -46,6 +46,9 @@ dependencies {
     testImplementation(libs.junit)
     androidTestImplementation(libs.ext.junit)
     androidTestImplementation(libs.espresso.core)
+    //libreria para usar el lector de huella del dispositivo
+    implementation("androidx.biometric:biometric:1.1.0")
+    //libreria para usar firebase auth
     implementation("com.google.android.gms:play-services-auth:20.7.0")
     //agregadas para usar firebase VV
     implementation(platform("com.google.firebase:firebase-bom:34.5.0"))

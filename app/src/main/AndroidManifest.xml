@@ -14,11 +14,17 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.StockFashion">
         <activity
-            android:name=".DatosCliente"
+            android:name=".Perfil"
             android:exported="false" />
         <activity
-            android:name=".Item_Producto"
+            android:name=".Asistencia"
             android:exported="false" />
+        <activity
+            android:name=".DatosCliente"
+            android:exported="false" />
+<!--        <activity-->
+<!--            android:name=".Item_Producto"-->
+<!--            android:exported="false" />-->
         <activity
             android:name=".Despacho"
             android:exported="false" />

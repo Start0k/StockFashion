@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 import com.google.firebase.firestore.FirebaseFirestore;
@@ -22,6 +23,8 @@ public class menu extends AppCompatActivity {
     private MaterialCardView cardIngreso, cardStock, cardModificar, cardDespacho;
     private Button btnCrearUsuario;
     private Button btnCerrarSesion;
+
+    private View cardAsistencia;
 
     private android.widget.TextView tvTitle, tvSubtitle;
 
@@ -46,10 +49,18 @@ public class menu extends AppCompatActivity {
             cardDespacho = findViewById(R.id.cardDespacho);
             btnCrearUsuario = findViewById(R.id.btnCrearUsuario);
             btnCerrarSesion = findViewById(R.id.btnCerrarSesion);
+            cardAsistencia = findViewById(R.id.cardAsistencia);
         } catch (Exception e) {
             Log.e(TAG, "Error al enlazar las vistas. Verifica los IDs en activity_menu.xml", e);
 
         }
+
+        ImageButton btnPerfil = findViewById(R.id.btnPerfil);
+        btnPerfil.setOnClickListener(v -> {
+            Intent intent = new Intent(menu.this, Perfil.class);
+            startActivity(intent);
+        });
+
 
         // ... código anterior ...
 
@@ -125,6 +136,9 @@ public class menu extends AppCompatActivity {
         if (btnCrearUsuario != null) btnCrearUsuario.setOnClickListener(v -> startActivity(new Intent(menu.this, RegActivity.class)));
         if (cardModificar != null) cardModificar.setOnClickListener(v -> startActivity(new Intent(menu.this, Modificar.class)));
         if (cardDespacho != null) cardDespacho.setOnClickListener(v -> startActivity(new Intent(menu.this, Despacho.class)));
+        if (cardAsistencia != null) cardAsistencia.setOnClickListener(v -> startActivity(new Intent(menu.this, Asistencia.class)));
+
+
 
         if (btnCerrarSesion != null) {
             btnCerrarSesion.setOnClickListener(v -> {

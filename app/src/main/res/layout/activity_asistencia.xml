@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:gravity="center_horizontal"
+    android:padding="24dp"
+    android:background="#F9FAFB"
+    tools:context=".Asistencia">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Control de Asistencia"
+        android:textSize="24sp"
+        android:textStyle="bold"
+        android:textColor="#111827"
+        android:layout_marginTop="20dp"/>
+
+    <TextView
+        android:id="@+id/tvFechaHoy"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Fecha actual"
+        android:textSize="16sp"
+        android:textColor="#6B7280"
+        android:layout_marginTop="8dp"/>
+
+    <!-- Reloj Digital Grande -->
+    <TextClock
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:format12Hour="hh:mm:ss a"
+        android:format24Hour="HH:mm:ss"
+        android:textSize="48sp"
+        android:textStyle="bold"
+        android:textColor="#374151"
+        android:layout_marginTop="40dp"
+        android:layout_marginBottom="60dp"/>
+
+    <!-- Botón ENTRADA -->
+    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/btnMarcarEntrada"
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        android:layout_marginBottom="20dp"
+        app:cardBackgroundColor="#DCFCE7"
+        app:cardCornerRadius="16dp"
+        app:strokeColor="#86EFAC"
+        app:strokeWidth="1dp"
+        android:clickable="true"
+        android:focusable="true">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:orientation="vertical">
+
+            <ImageView
+                android:layout_width="32dp"
+                android:layout_height="32dp"
+                android:src="@drawable/ic_entrar"
+                app:tint="#166534"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="MARCAR ENTRADA"
+                android:textSize="20sp"
+                android:textStyle="bold"
+                android:textColor="#14532D"
+                android:layout_marginTop="8dp"/>
+        </LinearLayout>
+    </com.google.android.material.card.MaterialCardView>
+
+    <!-- Botón SALIDA -->
+    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/btnMarcarSalida"
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        app:cardBackgroundColor="#FEE2E2"
+        app:cardCornerRadius="16dp"
+        app:strokeColor="#FCA5A5"
+        app:strokeWidth="1dp"
+        android:clickable="true"
+        android:focusable="true">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:orientation="vertical">
+
+            <ImageView
+                android:layout_width="32dp"
+                android:layout_height="32dp"
+                android:src="@drawable/ic_salir"
+                app:tint="#991B1B"/>
+            <!-- Si quieres un icono diferente, usa exit_to_app -->
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="MARCAR SALIDA"
+                android:textSize="20sp"
+                android:textStyle="bold"
+                android:textColor="#7F1D1D"
+                android:layout_marginTop="8dp"/>
+        </LinearLayout>
+    </com.google.android.material.card.MaterialCardView>
+    <TextView
+        android:id="@+id/tvEstado"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Presiona un botón y usa tu huella para confirmar"
+        android:textAlignment="center"
+        android:textColor="#6B7280"
+        android:layout_marginTop="40dp"/>
+
+</LinearLayout>

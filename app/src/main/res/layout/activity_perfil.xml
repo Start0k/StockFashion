@@ -1,0 +1,185 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="#F9FAFB"
+    tools:context=".Perfil">
+
+    <!-- Encabezado -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="24dp"
+        android:background="@android:color/white"
+        android:elevation="4dp"
+        android:orientation="horizontal"
+        android:gravity="center_vertical">
+
+        <ImageButton
+            android:id="@+id/btnVolver"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:src="@drawable/abc_vector_test"
+            app:tint="#374151"
+            android:background="?attr/selectableItemBackgroundBorderless"
+            android:contentDescription="Volver" />
+        <!-- Nota: Si tienes un icono de flecha atrás (ej: baseline_arrow_back_24), úsalo aquí -->
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Mi Perfil"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            android:textColor="#111827"
+            android:layout_marginStart="16dp"/>
+    </LinearLayout>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:padding="24dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <!-- Foto de perfil (Placeholder) -->
+            <ImageView
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:src="@drawable/ic_perfil"
+                app:tint="#FF000000"
+                android:background="@drawable/ic_circulo"
+                android:padding="20dp"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginBottom="24dp"/>
+            <!-- Si no tienes 'circle_background', el icono se verá cuadrado, no pasa nada -->
+
+            <!-- Tarjeta de Datos -->
+            <com.google.android.material.card.MaterialCardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:cardCornerRadius="16dp"
+                app:cardElevation="2dp"
+                app:cardBackgroundColor="@android:color/white">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:padding="20dp">
+
+                    <!-- Nombre -->
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Nombre Completo"
+                        android:textColor="#6B7280"
+                        android:textSize="12sp"/>
+                    <TextView
+                        android:id="@+id/tvPerfilNombre"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Cargando..."
+                        android:textColor="#111827"
+                        android:textSize="16sp"
+                        android:textStyle="bold"
+                        android:layout_marginBottom="16dp"/>
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:background="#E5E7EB"
+                        android:layout_marginBottom="16dp"/>
+
+                    <!-- Email -->
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Correo Electrónico"
+                        android:textColor="#6B7280"
+                        android:textSize="12sp"/>
+                    <TextView
+                        android:id="@+id/tvPerfilEmail"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Cargando..."
+                        android:textColor="#111827"
+                        android:textSize="16sp"
+                        android:layout_marginBottom="16dp"/>
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:background="#E5E7EB"
+                        android:layout_marginBottom="16dp"/>
+
+                    <!-- Rol -->
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Rol de Usuario"
+                        android:textColor="#6B7280"
+                        android:textSize="12sp"/>
+                    <TextView
+                        android:id="@+id/tvPerfilRol"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Cargando..."
+                        android:textColor="#2563EB"
+                        android:textStyle="bold"
+                        android:textSize="16sp"
+                        android:layout_marginBottom="16dp"/>
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:background="#E5E7EB"
+                        android:layout_marginBottom="16dp"/>
+
+                    <!-- UID (Opcional, útil para soporte) -->
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="ID de Usuario (UID)"
+                        android:textColor="#6B7280"
+                        android:textSize="12sp"/>
+                    <TextView
+                        android:id="@+id/tvPerfilUid"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="..."
+                        android:textColor="#9CA3AF"
+                        android:textSize="12sp"
+                        android:fontFamily="monospace"/>
+
+                </LinearLayout>
+            </com.google.android.material.card.MaterialCardView>
+
+        </LinearLayout>
+    </ScrollView>
+
+    <!-- Botón Cerrar Sesión (Al fondo) -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="24dp"
+        android:background="@android:color/white">
+
+        <Button
+            android:id="@+id/btnPerfilCerrarSesion"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Cerrar Sesión"
+            android:textColor="#EF4444"
+            android:backgroundTint="#FEF2F2"
+            style="@style/Widget.Material3.Button.TextButton"/>
+    </LinearLayout>
+
+</LinearLayout>

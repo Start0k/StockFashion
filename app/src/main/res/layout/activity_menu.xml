@@ -19,23 +19,60 @@
             android:orientation="vertical"
             android:padding="24dp">
 
-
-            <TextView
-                android:id="@+id/tvTitle"
-                android:layout_width="wrap_content"
+            <!-- ENCABEZADO CON BOTÓN PERFIL -->
+            <LinearLayout
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="StockFashion"
-                android:textColor="#111827"
-                android:textSize="22sp"
-                android:textStyle="bold" />
+                android:orientation="horizontal"
+                android:gravity="center_vertical"
+                android:layout_marginBottom="4dp">
 
-            <TextView
-                android:id="@+id/tvSubtitle"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Gestión de inventario"
-                android:textColor="#6B7280"
-                android:layout_marginTop="4dp"/>
+                <!-- Textos (Título y Subtítulo) -->
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/tvTitle"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="StockFashion"
+                        android:textColor="#111827"
+                        android:textSize="22sp"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:id="@+id/tvSubtitle"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Gestión de inventario"
+                        android:textColor="#6B7280"
+                        android:layout_marginTop="4dp"/>
+                </LinearLayout>
+
+                <!-- BOTÓN DE PERFIL -->
+                <androidx.cardview.widget.CardView
+                    android:layout_width="48dp"
+                    android:layout_height="48dp"
+                    app:cardCornerRadius="24dp"
+                    app:cardElevation="0dp"
+                    app:cardBackgroundColor="#E5E7EB">
+
+                    <ImageButton
+                        android:id="@+id/btnPerfil"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:background="?attr/selectableItemBackground"
+                        android:src="@drawable/ic_perfil"
+                        app:tint="#374151"
+                        android:contentDescription="Ir al perfil"
+                        android:scaleType="centerInside"/>
+                </androidx.cardview.widget.CardView>
+
+            </LinearLayout>
+            <!-- FIN DEL ENCABEZADO -->
 
 
             <LinearLayout
@@ -44,7 +81,7 @@
                 android:orientation="vertical"
                 android:layout_marginTop="24dp">
 
-
+                <!-- CARD 1: INGRESO -->
                 <com.google.android.material.card.MaterialCardView
                     android:id="@+id/cardIngreso"
                     android:layout_width="match_parent"
@@ -86,13 +123,13 @@
                             <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:text="Agregar nuevos productos al inventario"
+                                android:text="Agregar nuevos productos"
                                 android:textColor="#2563EB"/>
                         </LinearLayout>
                     </LinearLayout>
                 </com.google.android.material.card.MaterialCardView>
 
-
+                <!-- CARD 2: STOCK -->
                 <com.google.android.material.card.MaterialCardView
                     android:id="@+id/cardStock"
                     android:layout_width="match_parent"
@@ -134,13 +171,13 @@
                             <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:text="Consultar inventario disponible"
+                                android:text="Consultar inventario"
                                 android:textColor="#059669"/>
                         </LinearLayout>
                     </LinearLayout>
                 </com.google.android.material.card.MaterialCardView>
 
-
+                <!-- CARD 3: MODIFICAR -->
                 <com.google.android.material.card.MaterialCardView
                     android:id="@+id/cardModificar"
                     android:layout_width="match_parent"
@@ -188,11 +225,12 @@
                     </LinearLayout>
                 </com.google.android.material.card.MaterialCardView>
 
-
+                <!-- CARD 4: DESPACHO -->
                 <com.google.android.material.card.MaterialCardView
                     android:id="@+id/cardDespacho"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_marginBottom="12dp"
                     app:cardBackgroundColor="#FFF7ED"
                     app:cardCornerRadius="16dp"
                     app:strokeColor="#FED7AA"
@@ -235,6 +273,55 @@
                     </LinearLayout>
                 </com.google.android.material.card.MaterialCardView>
 
+                <!-- CARD 5: MARCAR ASISTENCIA (NUEVA) -->
+                <com.google.android.material.card.MaterialCardView
+                    android:id="@+id/cardAsistencia"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="12dp"
+                    app:cardBackgroundColor="#ECFEFF"
+                    app:cardCornerRadius="16dp"
+                    app:strokeColor="#A5F3FC"
+                    app:strokeWidth="1dp">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:padding="16dp"
+                        android:gravity="center_vertical">
+
+                        <!-- Recuerda tener el icono baseline_access_time_24 en drawable -->
+                        <ImageView
+                            android:layout_width="28dp"
+                            android:layout_height="28dp"
+                            android:src="@drawable/ic_reloj"
+                            app:tint="#0891B2"
+                            android:contentDescription="Asistencia" />
+
+                        <LinearLayout
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:orientation="vertical"
+                            android:layout_marginStart="12dp">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="Marcar Asistencia"
+                                android:textColor="#1F2937"
+                                android:textStyle="bold"/>
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="Registrar entrada o salida"
+                                android:textColor="#0891B2"/>
+                        </LinearLayout>
+                    </LinearLayout>
+                </com.google.android.material.card.MaterialCardView>
+
             </LinearLayout>
 
         </LinearLayout>
@@ -242,7 +329,7 @@
     </ScrollView>
 
 
-
+    <!-- Parte inferior (Footer) -->
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -253,6 +340,7 @@
         android:paddingTop="8dp"
         android:background="#F9FAFB">
 
+        <!-- Solo visible para Administradores (controlado en Java) -->
         <Button
             android:id="@+id/btnCrearUsuario"
             android:layout_width="match_parent"
@@ -263,7 +351,7 @@
             android:visibility="gone"
             tools:visibility="visible" />
 
-
+        <!-- Botón Cerrar Sesión -->
         <Button
             android:id="@+id/btnCerrarSesion"
             style="@style/Widget.Material3.Button.OutlinedButton"

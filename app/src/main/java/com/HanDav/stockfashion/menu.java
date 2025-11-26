@@ -8,7 +8,6 @@ import android.widget.Button;
 import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 import com.google.firebase.firestore.FirebaseFirestore;
-import com.google.firebase.firestore.DocumentSnapshot;
 
 
 import com.google.android.material.card.MaterialCardView;
@@ -124,6 +123,7 @@ public class menu extends AppCompatActivity {
         if (cardIngreso != null) cardIngreso.setOnClickListener(v -> startActivity(new Intent(menu.this, Ingreso.class)));
         if (cardStock != null) cardStock.setOnClickListener(v -> startActivity(new Intent(menu.this, verStock.class)));
         if (btnCrearUsuario != null) btnCrearUsuario.setOnClickListener(v -> startActivity(new Intent(menu.this, RegActivity.class)));
+        if (cardModificar != null) cardModificar.setOnClickListener(v -> startActivity(new Intent(menu.this, Modificar.class)));
 
         if (btnCerrarSesion != null) {
             btnCerrarSesion.setOnClickListener(v -> {

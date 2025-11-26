@@ -39,10 +39,10 @@
             android:exported="false"
             android:theme="@style/Theme.StockFashion" />
         <activity
-            android:name=".Modificar"
+            android:name=".verStock"
             android:exported="false" />
         <activity
-            android:name=".verStock"
+            android:name=".Modificar"
             android:exported="false" />
         <activity
             android:name=".Ingreso"

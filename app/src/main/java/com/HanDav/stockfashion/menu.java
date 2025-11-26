@@ -124,6 +124,7 @@ public class menu extends AppCompatActivity {
         if (cardStock != null) cardStock.setOnClickListener(v -> startActivity(new Intent(menu.this, verStock.class)));
         if (btnCrearUsuario != null) btnCrearUsuario.setOnClickListener(v -> startActivity(new Intent(menu.this, RegActivity.class)));
         if (cardModificar != null) cardModificar.setOnClickListener(v -> startActivity(new Intent(menu.this, Modificar.class)));
+        if (cardDespacho != null) cardDespacho.setOnClickListener(v -> startActivity(new Intent(menu.this, Despacho.class)));
 
         if (btnCerrarSesion != null) {
             btnCerrarSesion.setOnClickListener(v -> {

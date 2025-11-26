@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal"
+    android:padding="12dp"
+    android:background="@drawable/bg_input"
+    android:layout_marginBottom="8dp"
+    android:gravity="center_vertical">
+
+    <!-- Información del Producto -->
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:orientation="vertical">
+
+        <!-- Este es el ID que te faltaba: txtNombreItem -->
+        <TextView
+            android:id="@+id/txtNombreItem"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Nombre Producto"
+            android:textStyle="bold"
+            android:textColor="#374151"
+            android:textSize="16sp"/>
+
+        <!-- Este es el ID que te faltaba: txtDetalleItem -->
+        <TextView
+            android:id="@+id/txtDetalleItem"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Marca - Talla M"
+            android:textColor="#6B7280"
+            android:textSize="14sp"/>
+    </LinearLayout>
+
+    <!-- Cantidad -->
+    <!-- Este es el ID que te faltaba: txtCantidadItem -->
+    <TextView
+        android:id="@+id/txtCantidadItem"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="x1"
+        android:textStyle="bold"
+        android:textColor="#F97316"
+        android:textSize="18sp"
+        android:layout_marginEnd="16dp"/>
+
+    <!-- Botón Eliminar -->
+    <!-- Este es el ID que te faltaba: btnEliminarItem -->
+    <ImageButton
+        android:id="@+id/btnEliminarItem"
+        android:layout_width="32dp"
+        android:layout_height="32dp"
+        android:src="@android:drawable/ic_menu_delete"
+        android:background="?attr/selectableItemBackgroundBorderless"
+        android:contentDescription="Eliminar item"/>
+
+</LinearLayout>

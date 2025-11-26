@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal"
+    android:padding="8dp"
+    android:background="@drawable/bg_producto_item">
+
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_weight="1">
+
+        <TextView
+            android:id="@+id/txtNombreProducto"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Modelo X"
+            android:textColor="#111827"
+            android:textSize="14sp"
+            android:textStyle="bold"/>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginTop="4dp">
+
+            <TextView
+                android:id="@+id/txtMarcaProducto"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Nike"
+                android:textSize="11sp"
+                android:textColor="#4B5563"
+                android:padding="4dp"
+                android:background="@drawable/bg_chip" />
+
+            <TextView
+                android:id="@+id/txtTipoProducto"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Zapatillas"
+                android:textSize="11sp"
+                android:textColor="#4B5563"
+                android:padding="4dp"
+                android:layout_marginStart="4dp"
+                android:background="@drawable/bg_chip" />
+
+            <TextView
+                android:id="@+id/txtTallaProducto"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="M"
+                android:textSize="11sp"
+                android:textColor="#4B5563"
+                android:padding="4dp"
+                android:layout_marginStart="4dp"
+                android:background="@drawable/bg_chip" />
+        </LinearLayout>
+    </LinearLayout>
+
+    <ImageButton
+        android:id="@+id/btnEliminarProducto"
+        android:layout_width="32dp"
+        android:layout_height="32dp"
+        android:src="@drawable/ic_delete"
+        android:background="@android:color/transparent"
+
+        android:contentDescription="Eliminar" />
+</LinearLayout>

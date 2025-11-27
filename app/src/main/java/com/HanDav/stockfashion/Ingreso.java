@@ -54,20 +54,24 @@ public class Ingreso extends AppCompatActivity {
         db = FirebaseFirestore.getInstance();
 
         // Inicializar Vistas (Asegúrate que los IDs coincidan con tu nuevo XML)
-        etNombre = findViewById(R.id.etNombre);
-        etCantidad = findViewById(R.id.etCantidad);
+        etNombre = findViewById(R.id.etNombre1);
 
-        spMarca = findViewById(R.id.spinnerMarca);
-        spTipo = findViewById(R.id.spinnerTipo);
-        spTalla = findViewById(R.id.spinnerTalla);
+        etCantidad = findViewById(R.id.etCantidad1);
 
-        btnAgregar = findViewById(R.id.btnAgregar);
+        spMarca = findViewById(R.id.spMarca1);
+        spTipo = findViewById(R.id.spTipo1);
+        spTalla = findViewById(R.id.spTalla1);
+
+
+        btnAgregar = findViewById(R.id.btnAgregarItem);
+
 
         // CAMBIO 3: Configurar los Adaptadores para los Spinners
         configurarSpinners();
 
         // Configurar RecyclerView
-        recyclerView = findViewById(R.id.tblIngresoProductos);
+        recyclerView = findViewById(R.id.rvInventario);
+
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         listaProductos = new ArrayList<>();
         adapter = new ProductoAdapter(listaProductos);

@@ -148,46 +148,83 @@ public class Despacho extends AppCompatActivity {
     }
 
     // --- BÚSQUEDA DE PRODUCTOS EN FIREBASE ---
+    // Reemplaza el método buscarProductosDisponibles() con este bloque:
+
     private void buscarProductosDisponibles() {
+        // 1. Verificar que los Spinners tengan datos seleccionados
         if (spMarca.getSelectedItem() == null || spTipo.getSelectedItem() == null || spTalla.getSelectedItem() == null) {
+            Log.d(TAG, "Filtros incompletos. Esperando selección del usuario...");
             return;
         }
 
-        String marca = spMarca.getSelectedItem().toString();
-        String tipo = spTipo.getSelectedItem().toString();
-        String talla = spTalla.getSelectedItem().toString();
+        String marcaSeleccionada = spMarca.getSelectedItem().toString();
+        String tipoSeleccionado = spTipo.getSelectedItem().toString();
+        String tallaSeleccionada = spTalla.getSelectedItem().toString();
 
+        Log.d(TAG, "Buscando productos con -> Marca: " + marcaSeleccionada + " | Tipo: " + tipoSeleccionado + " | Talla: " + tallaSeleccionada);
+
+        // 2. Limpiar lista actual visualmente para evitar confusiones
+        nombresProductos.clear();
+        productosEncontrados.clear();
+        ArrayAdapter<String> adapterVacio = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, nombresProductos);
+        adapterVacio.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spNombre.setAdapter(adapterVacio);
+
+        // 3. Realizar la consulta a Firestore
         db.collection("productos")
-                .whereEqualTo("marca", marca)
-                .whereEqualTo("tipo", tipo)
-                .whereEqualTo("talla", talla)
-                .whereGreaterThan("cantidad", 0) // Solo mostramos si hay stock
+                .whereEqualTo("marca", marcaSeleccionada)
+                .whereEqualTo("tipo", tipoSeleccionado)
+                .whereEqualTo("talla", tallaSeleccionada)
+                .whereGreaterThan("cantidad", 0) // Solo mostrar si hay stock
                 .get()
                 .addOnSuccessListener(queryDocumentSnapshots -> {
-                    productosEncontrados.clear();
-                    nombresProductos.clear();
+                    if (!queryDocumentSnapshots.isEmpty()) {
+                        Log.d(TAG, "¡Éxito! Se encontraron " + queryDocumentSnapshots.size() + " productos.");
 
-                    for (DocumentSnapshot doc : queryDocumentSnapshots) {
-                        Producto p = doc.toObject(Producto.class);
-                        if (p != null) {
-                            p.setId(doc.getId());
-                            productosEncontrados.add(p);
-                            nombresProductos.add(p.getNombre() + " (Disp: " + p.getCantidad() + ")");
+                        for (DocumentSnapshot doc : queryDocumentSnapshots) {
+                            try {
+                                Producto p = doc.toObject(Producto.class);
+                                if (p != null) {
+                                    p.setId(doc.getId()); // Guardar el ID del documento
+                                    productosEncontrados.add(p);
+                                    // Mostramos Nombre y Stock disponible en el Spinner
+                                    nombresProductos.add(p.getNombre() + " (Stock: " + p.getCantidad() + ")");
+                                }
+                            } catch (Exception e) {
+                                Log.e(TAG, "Error al convertir documento: " + doc.getId(), e);
+                            }
                         }
-                    }
 
-                    ((ArrayAdapter) spNombre.getAdapter()).notifyDataSetChanged();
+                        // 4. Actualizar el Spinner de Nombres
+                        ArrayAdapter<String> adapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, nombresProductos);
+                        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+                        spNombre.setAdapter(adapter);
 
-                    if (productosEncontrados.isEmpty()) {
-                        productoSeleccionadoActual = null;
-                        // Opcional: Mostrar Toast solo si el usuario ya interactuó
+                        // Seleccionar el primero por defecto
+                        if (!productosEncontrados.isEmpty()) {
+                            spNombre.setSelection(0);
+                            productoSeleccionadoActual = productosEncontrados.get(0);
+                        }
+
                     } else {
-                        spNombre.setSelection(0);
-                        productoSeleccionadoActual = productosEncontrados.get(0);
+                        Log.d(TAG, "Consulta exitosa pero SIN resultados.");
+                        Toast.makeText(Despacho.this, "No hay stock para " + marcaSeleccionada + " " + tipoSeleccionado + " " + tallaSeleccionada, Toast.LENGTH_SHORT).show();
+                        productoSeleccionadoActual = null;
                     }
                 })
-                .addOnFailureListener(e -> Log.e(TAG, "Error buscando productos", e));
+                .addOnFailureListener(e -> {
+                    Log.e(TAG, "Error en la consulta Firestore", e);
+
+                    // Este mensaje es CLAVE si falta el índice
+                    if (e.getMessage() != null && e.getMessage().contains("index")) {
+                        Toast.makeText(Despacho.this, "Falta crear índice en Firebase. Revisa el Logcat.", Toast.LENGTH_LONG).show();
+                        Log.e(TAG, "ENLACE PARA CREAR ÍNDICE: " + e.getMessage());
+                    } else {
+                        Toast.makeText(Despacho.this, "Error al cargar productos", Toast.LENGTH_SHORT).show();
+                    }
+                });
     }
+
 
     // --- LOGICA DEL CARRITO ---
     private void agregarAlCarrito() {

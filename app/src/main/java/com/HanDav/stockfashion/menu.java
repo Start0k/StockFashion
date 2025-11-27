@@ -20,7 +20,7 @@ public class menu extends AppCompatActivity {
     private static final String TAG = "MenuActivity";
 
     // Vistas
-    private MaterialCardView cardIngreso, cardStock, cardModificar, cardDespacho;
+    private MaterialCardView cardIngreso, cardStock, cardModificar, cardDespacho, cardReportes;
     private Button btnCrearUsuario;
     private Button btnCerrarSesion;
 
@@ -48,8 +48,10 @@ public class menu extends AppCompatActivity {
             cardModificar = findViewById(R.id.cardModificar);
             cardDespacho = findViewById(R.id.cardDespacho);
             btnCrearUsuario = findViewById(R.id.btnCrearUsuario);
-            btnCerrarSesion = findViewById(R.id.btnCerrarSesion);
+            //btnCerrarSesion = findViewById(R.id.btnCerrarSesion);
             cardAsistencia = findViewById(R.id.cardAsistencia);
+            cardReportes = findViewById(R.id.cardReportes);
+
         } catch (Exception e) {
             Log.e(TAG, "Error al enlazar las vistas. Verifica los IDs en activity_menu.xml", e);
 
@@ -137,7 +139,7 @@ public class menu extends AppCompatActivity {
         if (cardModificar != null) cardModificar.setOnClickListener(v -> startActivity(new Intent(menu.this, Modificar.class)));
         if (cardDespacho != null) cardDespacho.setOnClickListener(v -> startActivity(new Intent(menu.this, Despacho.class)));
         if (cardAsistencia != null) cardAsistencia.setOnClickListener(v -> startActivity(new Intent(menu.this, Asistencia.class)));
-
+        if (cardReportes != null) cardReportes.setOnClickListener(v -> startActivity(new Intent(menu.this, ReportesAsistencia.class)));
 
 
         if (btnCerrarSesion != null) {
@@ -159,6 +161,8 @@ public class menu extends AppCompatActivity {
             cardModificar.setVisibility(View.VISIBLE);
             cardDespacho.setVisibility(View.VISIBLE);
             btnCrearUsuario.setVisibility(View.VISIBLE);
+            cardAsistencia.setVisibility(View.VISIBLE);
+            cardReportes.setVisibility(View.VISIBLE);
         } else { // Rol "usuario"
             Log.d(TAG, "Usuario es estándar. Ocultando opciones de administrador.");
             cardIngreso.setVisibility(View.GONE);
@@ -166,6 +170,8 @@ public class menu extends AppCompatActivity {
             btnCrearUsuario.setVisibility(View.GONE);
             cardStock.setVisibility(View.VISIBLE);
             cardDespacho.setVisibility(View.GONE);
+            cardAsistencia.setVisibility(View.VISIBLE);
+            cardReportes.setVisibility(View.GONE);
         }
     }
 }

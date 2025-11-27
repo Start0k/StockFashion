@@ -107,6 +107,32 @@
             android:backgroundTint="#DB4437"
             android:textColor="#FFFFFF"
             android:layout_marginTop="10dp"/>
+        <!-- Copia esto debajo de tu botón de Login actual -->
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center"
+            android:layout_marginTop="24dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="¿No tienes cuenta?"
+                android:textColor="#6B7280"/>
+
+            <Button
+                android:id="@+id/btnIrRegistro"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Regístrate"
+                android:textColor="#2563EB"
+                style="@style/Widget.Material3.Button.TextButton"
+                android:textStyle="bold"/>
+
+        </LinearLayout>
+
 
 
         <ProgressBar

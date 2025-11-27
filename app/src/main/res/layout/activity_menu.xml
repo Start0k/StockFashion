@@ -320,7 +320,57 @@
                                 android:textColor="#0891B2"/>
                         </LinearLayout>
                     </LinearLayout>
+
                 </com.google.android.material.card.MaterialCardView>
+                <!-- CARD 6: REPORTES DE ASISTENCIA -->
+                <com.google.android.material.card.MaterialCardView
+                    android:id="@+id/cardReportes"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="12dp"
+                    app:cardBackgroundColor="#F8FAFC"
+                    app:cardCornerRadius="16dp"
+                    app:strokeColor="#E2E8F0"
+                    app:strokeWidth="1dp">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:padding="16dp"
+                        android:gravity="center_vertical">
+
+
+                        <ImageView
+                            android:layout_width="28dp"
+                            android:layout_height="28dp"
+                            android:src="@drawable/ic_calendario"
+                            app:tint="#475569"
+                            android:contentDescription="Icono Reportes" />
+
+                        <LinearLayout
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:orientation="vertical"
+                            android:layout_marginStart="12dp">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="Reportes Asistencia"
+                                android:textColor="#1F2937"
+                                android:textStyle="bold"/>
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="Ver historial por empleado"
+                                android:textColor="#475569"/>
+                        </LinearLayout>
+                    </LinearLayout>
+                </com.google.android.material.card.MaterialCardView>
+
 
             </LinearLayout>
 
@@ -329,7 +379,7 @@
     </ScrollView>
 
 
-    <!-- Parte inferior (Footer) -->
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -340,7 +390,7 @@
         android:paddingTop="8dp"
         android:background="#F9FAFB">
 
-        <!-- Solo visible para Administradores (controlado en Java) -->
+
         <Button
             android:id="@+id/btnCrearUsuario"
             android:layout_width="match_parent"
@@ -352,7 +402,7 @@
             tools:visibility="visible" />
 
         <!-- Botón Cerrar Sesión -->
-        <Button
+        <!--Button
             android:id="@+id/btnCerrarSesion"
             style="@style/Widget.Material3.Button.OutlinedButton"
             android:layout_width="match_parent"
@@ -360,7 +410,7 @@
             android:layout_marginTop="8dp"
             android:text="Cerrar Sesión"
             android:textColor="#EF4444"
-            app:strokeColor="#EF4444" />
+            app:strokeColor="#EF4444" /-->
     </LinearLayout>
 
 </LinearLayout>

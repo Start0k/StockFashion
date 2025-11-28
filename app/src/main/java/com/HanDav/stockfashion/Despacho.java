@@ -28,6 +28,8 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 
+// Importante: Asegúrate de que ItemCarrito está en el mismo paquete o impórtalo
+
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
@@ -53,11 +55,12 @@ public class Despacho extends AppCompatActivity {
     private List<String> listaTallas = new ArrayList<>();
 
     // Datos del Producto Seleccionado Actualmente
-    private List<Producto> productosEncontrados = new ArrayList<>(); // Objetos completos
-    private List<String> nombresProductos = new ArrayList<>(); // Solo strings para el spinner
+    private List<Producto> productosEncontrados = new ArrayList<>(); // Objetos completos (STOCK)
+    private List<String> nombresProductos = new ArrayList<>(); // Strings para mostrar en spinner
     private Producto productoSeleccionadoActual = null;
 
     // Carrito de Compras
+    // IMPORTANTE: Usamos la clase ItemCarrito externa, no una interna
     private List<ItemCarrito> listaCarrito = new ArrayList<>();
     private CarritoAdapter adapterCarrito;
 
@@ -73,14 +76,14 @@ public class Despacho extends AppCompatActivity {
         configurarSpinnersFiltros();
         configurarRecyclerView();
 
-        // Cargar catálogos (igual que en Ingreso)
+        // Cargar catálogos desde Firebase
         cargarCatalogos();
 
         // Listeners de Botones
         btnAgregar.setOnClickListener(v -> agregarAlCarrito());
         btnConfirmar.setOnClickListener(v -> irAConfirmacion());
 
-        // Ajuste de bordes
+        // Ajuste de bordes (EdgeToEdge)
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
             Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
@@ -94,8 +97,7 @@ public class Despacho extends AppCompatActivity {
         spTalla = findViewById(R.id.spTalla);
         spNombre = findViewById(R.id.spNombre);
 
-        // Asegúrate que este ID exista en tu XML (si no lo tienes, agrégalo como te mencioné antes)
-        etCantidad = findViewById(R.id.etCantidadDespacho);
+        etCantidad = findViewById(R.id.etCantidadDespacho); // Asegúrate que este ID exista en el XML
 
         btnAgregar = findViewById(R.id.btnAgregarProducto);
         btnConfirmar = findViewById(R.id.btnConfirmarOrden);
@@ -126,7 +128,7 @@ public class Despacho extends AppCompatActivity {
         spTipo.setOnItemSelectedListener(listenerFiltros);
         spTalla.setOnItemSelectedListener(listenerFiltros);
 
-        // Listener: Cuando selecciona un nombre específico
+        // Listener: Cuando selecciona un nombre específico del resultado
         spNombre.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
@@ -148,12 +150,9 @@ public class Despacho extends AppCompatActivity {
     }
 
     // --- BÚSQUEDA DE PRODUCTOS EN FIREBASE ---
-    // Reemplaza el método buscarProductosDisponibles() con este bloque:
-
     private void buscarProductosDisponibles() {
         // 1. Verificar que los Spinners tengan datos seleccionados
         if (spMarca.getSelectedItem() == null || spTipo.getSelectedItem() == null || spTalla.getSelectedItem() == null) {
-            Log.d(TAG, "Filtros incompletos. Esperando selección del usuario...");
             return;
         }
 
@@ -161,33 +160,26 @@ public class Despacho extends AppCompatActivity {
         String tipoSeleccionado = spTipo.getSelectedItem().toString();
         String tallaSeleccionada = spTalla.getSelectedItem().toString();
 
-        Log.d(TAG, "Buscando productos con -> Marca: " + marcaSeleccionada + " | Tipo: " + tipoSeleccionado + " | Talla: " + tallaSeleccionada);
-
-        // 2. Limpiar lista actual visualmente para evitar confusiones
+        // 2. Limpiar lista actual visualmente
         nombresProductos.clear();
         productosEncontrados.clear();
-        ArrayAdapter<String> adapterVacio = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, nombresProductos);
-        adapterVacio.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        spNombre.setAdapter(adapterVacio);
+        ((ArrayAdapter) spNombre.getAdapter()).notifyDataSetChanged();
 
         // 3. Realizar la consulta a Firestore
         db.collection("productos")
                 .whereEqualTo("marca", marcaSeleccionada)
                 .whereEqualTo("tipo", tipoSeleccionado)
                 .whereEqualTo("talla", tallaSeleccionada)
-                .whereGreaterThan("cantidad", 0) // Solo mostrar si hay stock
+                .whereGreaterThan("cantidad", 0) // Solo mostrar si hay stock > 0
                 .get()
                 .addOnSuccessListener(queryDocumentSnapshots -> {
                     if (!queryDocumentSnapshots.isEmpty()) {
-                        Log.d(TAG, "¡Éxito! Se encontraron " + queryDocumentSnapshots.size() + " productos.");
-
                         for (DocumentSnapshot doc : queryDocumentSnapshots) {
                             try {
                                 Producto p = doc.toObject(Producto.class);
                                 if (p != null) {
-                                    p.setId(doc.getId()); // Guardar el ID del documento
+                                    p.setId(doc.getId()); // Importante: Guardar ID
                                     productosEncontrados.add(p);
-                                    // Mostramos Nombre y Stock disponible en el Spinner
                                     nombresProductos.add(p.getNombre() + " (Stock: " + p.getCantidad() + ")");
                                 }
                             } catch (Exception e) {
@@ -196,35 +188,27 @@ public class Despacho extends AppCompatActivity {
                         }
 
                         // 4. Actualizar el Spinner de Nombres
-                        ArrayAdapter<String> adapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, nombresProductos);
-                        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-                        spNombre.setAdapter(adapter);
+                        ((ArrayAdapter) spNombre.getAdapter()).notifyDataSetChanged();
 
-                        // Seleccionar el primero por defecto
                         if (!productosEncontrados.isEmpty()) {
                             spNombre.setSelection(0);
                             productoSeleccionadoActual = productosEncontrados.get(0);
+                        } else {
+                            productoSeleccionadoActual = null;
                         }
 
                     } else {
-                        Log.d(TAG, "Consulta exitosa pero SIN resultados.");
-                        Toast.makeText(Despacho.this, "No hay stock para " + marcaSeleccionada + " " + tipoSeleccionado + " " + tallaSeleccionada, Toast.LENGTH_SHORT).show();
+                        Toast.makeText(Despacho.this, "No hay stock disponible", Toast.LENGTH_SHORT).show();
                         productoSeleccionadoActual = null;
                     }
                 })
                 .addOnFailureListener(e -> {
                     Log.e(TAG, "Error en la consulta Firestore", e);
-
-                    // Este mensaje es CLAVE si falta el índice
                     if (e.getMessage() != null && e.getMessage().contains("index")) {
-                        Toast.makeText(Despacho.this, "Falta crear índice en Firebase. Revisa el Logcat.", Toast.LENGTH_LONG).show();
-                        Log.e(TAG, "ENLACE PARA CREAR ÍNDICE: " + e.getMessage());
-                    } else {
-                        Toast.makeText(Despacho.this, "Error al cargar productos", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(Despacho.this, "Falta índice. Revisa el Logcat.", Toast.LENGTH_LONG).show();
                     }
                 });
     }
-
 
     // --- LOGICA DEL CARRITO ---
     private void agregarAlCarrito() {
@@ -247,7 +231,7 @@ public class Despacho extends AppCompatActivity {
             return;
         }
 
-        // 1. Validar Stock
+        // 1. Validar Stock disponible
         if (cantidadSolicitada > productoSeleccionadoActual.getCantidad()) {
             Toast.makeText(this, "Stock insuficiente. Solo hay " + productoSeleccionadoActual.getCantidad(), Toast.LENGTH_LONG).show();
             return;
@@ -258,7 +242,7 @@ public class Despacho extends AppCompatActivity {
             return;
         }
 
-        // 2. Crear el ItemCarrito (Clase interna definida abajo)
+        // 2. Crear el ItemCarrito (Usando la clase externa nueva)
         ItemCarrito item = new ItemCarrito(
                 productoSeleccionadoActual.getId(),
                 productoSeleccionadoActual.getNombre(),
@@ -276,7 +260,7 @@ public class Despacho extends AppCompatActivity {
 
     private void configurarRecyclerView() {
         rvProductos.setLayoutManager(new LinearLayoutManager(this));
-        // Inicializamos el Adapter con la lista y el listener para eliminar
+        // Inicializamos el adapter pasando la lista y un listener para borrar
         adapterCarrito = new CarritoAdapter(listaCarrito, position -> {
             listaCarrito.remove(position);
             actualizarVistaCarrito();
@@ -298,19 +282,26 @@ public class Despacho extends AppCompatActivity {
         }
     }
 
+    // --- MÉTODO PARA IR A LA CONFIRMACIÓN (SIN GUARDAR TODAVÍA) ---
     private void irAConfirmacion() {
+        // 1. Validaciones
         if (listaCarrito.isEmpty()) {
             Toast.makeText(this, "El carrito está vacío", Toast.LENGTH_SHORT).show();
             return;
         }
 
-        // Asegúrate de que la clase 'DatosCliente' (o ConfirmarDespacho) exista
+        // 2. Crear Intent hacia DatosCliente
         Intent intent = new Intent(Despacho.this, DatosCliente.class);
+
+        // 3. Enviar la lista serializada
+        // La clase ItemCarrito (externa) implementa Serializable
         intent.putExtra("lista_carrito", (Serializable) listaCarrito);
+
+        // 4. Iniciar la actividad
         startActivity(intent);
     }
 
-    // --- CARGA DE DATOS INICIALES ---
+    // --- CARGA DE DATOS INICIALES (SPINNERS) ---
     private void cargarCatalogos() {
         cargarListaFirebase("marcas", listaMarcas, spMarca);
         cargarListaFirebase("tipos", listaTipos, spTipo);
@@ -331,38 +322,17 @@ public class Despacho extends AppCompatActivity {
     }
 
     // ==========================================
-    // CLASE INTERNA ItemCarrito
+    // CLASE INTERNA PARA EL ADAPTER DEL RECYCLERVIEW
     // ==========================================
-    public static class ItemCarrito implements Serializable {
-        public String idProducto;
-        public String nombre;
-        public String marca;
-        public String talla;
-        public int cantidad;
-
-        // Constructor vacío requerido para serialización
-        public ItemCarrito() {}
-
-        public ItemCarrito(String id, String n, String m, String t, int c) {
-            this.idProducto = id;
-            this.nombre = n;
-            this.marca = m;
-            this.talla = t;
-            this.cantidad = c;
-        }
-    }
-
     public static class CarritoAdapter extends RecyclerView.Adapter<CarritoAdapter.CarritoViewHolder> {
 
         private List<ItemCarrito> listaItems;
         private OnItemDeleteListener deleteListener;
 
-        // Interfaz para comunicar el clic de eliminación hacia Despacho.java
         public interface OnItemDeleteListener {
             void onDelete(int position);
         }
 
-        // Constructor que coincide con tu llamada en Despacho.java
         public CarritoAdapter(List<ItemCarrito> listaItems, OnItemDeleteListener deleteListener) {
             this.listaItems = listaItems;
             this.deleteListener = deleteListener;
@@ -371,7 +341,6 @@ public class Despacho extends AppCompatActivity {
         @NonNull
         @Override
         public CarritoViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-            // Inflamos el diseño de cada fila
             View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_carrito, parent, false);
             return new CarritoViewHolder(view);
         }
@@ -380,14 +349,13 @@ public class Despacho extends AppCompatActivity {
         public void onBindViewHolder(@NonNull CarritoViewHolder holder, int position) {
             ItemCarrito item = listaItems.get(position);
 
-            holder.txtNombre.setText(item.nombre);
-            holder.txtDetalle.setText(item.marca + " - " + item.talla);
-            holder.txtCantidad.setText("x" + item.cantidad);
+            // Usamos los getters de la clase ItemCarrito
+            holder.txtNombre.setText(item.getNombre());
+            holder.txtDetalle.setText(item.getMarca() + " - " + item.getTalla());
+            holder.txtCantidad.setText("x" + item.getCantidad());
 
-            // Configurar botón eliminar
             holder.btnEliminar.setOnClickListener(v -> {
                 if (deleteListener != null) {
-                    // getAdapterPosition() es más seguro que usar 'position' directamente
                     int pos = holder.getAdapterPosition();
                     if (pos != RecyclerView.NO_POSITION) {
                         deleteListener.onDelete(pos);
@@ -401,14 +369,12 @@ public class Despacho extends AppCompatActivity {
             return listaItems.size();
         }
 
-        // Clase interna ViewHolder para referencias las vistas
-        static class CarritoViewHolder extends RecyclerView.ViewHolder {
+        class CarritoViewHolder extends RecyclerView.ViewHolder {
             TextView txtNombre, txtDetalle, txtCantidad;
             ImageButton btnEliminar;
 
             public CarritoViewHolder(@NonNull View itemView) {
                 super(itemView);
-                // Asegúrate que estos IDs existan en layout/item_carrito.xml
                 txtNombre = itemView.findViewById(R.id.txtNombreItem);
                 txtDetalle = itemView.findViewById(R.id.txtDetalleItem);
                 txtCantidad = itemView.findViewById(R.id.txtCantidadItem);

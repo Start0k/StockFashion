@@ -1,3 +1,4 @@
+<?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/main"
@@ -6,17 +7,56 @@
     android:orientation="vertical"
     android:background="#FAFAFA">
 
-
+    <!-- HEADER NEGRO -->
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="#111827"
-        android:orientation="vertical"
-        android:padding="16dp">
+        android:background="#10B981"
+        android:orientation="horizontal"
+        android:padding="16dp"
+        android:gravity="center_vertical">
 
+        <!-- Icono redondo -->
+        <LinearLayout
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:background="#10B981"
+            android:gravity="center"
+            android:layout_marginEnd="12dp"
+            android:orientation="vertical">
+
+            <ImageView
+                android:layout_width="22dp"
+                android:layout_height="22dp"
+                app:srcCompat="@drawable/outline_checkroom_24"
+                />
+        </LinearLayout>
+
+        <!-- Títulos -->
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_weight="1">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="StockFashion"
+                android:textColor="#FFFFFF"
+                android:textSize="18sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Gestión de inventario"
+                android:textColor="#ffffff"
+                android:textSize="13sp" />
+        </LinearLayout>
     </LinearLayout>
 
-
+    <!-- BARRA DE BÚSQUEDA -->
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -29,7 +69,8 @@
             android:layout_width="24dp"
             android:layout_height="24dp"
             app:srcCompat="@drawable/outline_checkroom_24"
-            />
+
+            android:layout_gravity="center_vertical" />
 
         <EditText
             android:id="@+id/etSearch"
@@ -37,10 +78,13 @@
             android:layout_height="wrap_content"
             android:hint="Buscar por nombre..."
             android:padding="8dp"
-            android:layout_marginStart="8dp" />
+            android:layout_marginStart="8dp"
+            android:background="@android:color/transparent"
+            android:textColor="#111827"
+            android:textColorHint="#9CA3AF" />
     </LinearLayout>
 
-
+    <!-- FILTROS (SPINNERS) -->
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -49,24 +93,43 @@
         android:gravity="center"
         android:weightSum="4">
 
-        <Spinner android:id="@+id/spMarca"
-            android:layout_width="0dp" android:layout_height="wrap_content"
-            android:layout_weight="1"/>
-        <Spinner android:id="@+id/spTipo"
-            android:layout_width="0dp" android:layout_height="wrap_content"
-            android:layout_weight="1"/>
-        <Spinner android:id="@+id/spTalla"
-            android:layout_width="0dp" android:layout_height="wrap_content"
-            android:layout_weight="1"/>
-        <Spinner android:id="@+id/spCantidad"
-            android:layout_width="0dp" android:layout_height="wrap_content"
-            android:layout_weight="1"/>
+        <Spinner
+            android:id="@+id/spMarca"
+            android:layout_width="0dp"
+            android:layout_height="48dp"
+            android:layout_weight="1"
+            android:layout_marginEnd="4dp"
+            android:background="@drawable/spinner_background" />
+
+        <Spinner
+            android:id="@+id/spTipo"
+            android:layout_width="0dp"
+            android:layout_height="48dp"
+            android:layout_weight="1"
+            android:layout_marginEnd="4dp"
+            android:background="@drawable/spinner_background" />
+
+        <Spinner
+            android:id="@+id/spTalla"
+            android:layout_width="0dp"
+            android:layout_height="48dp"
+            android:layout_weight="1"
+            android:layout_marginEnd="4dp"
+            android:background="@drawable/spinner_background" />
+
+        <Spinner
+            android:id="@+id/spCantidad"
+            android:layout_width="0dp"
+            android:layout_height="48dp"
+            android:layout_weight="1"
+            android:background="@drawable/spinner_background" />
     </LinearLayout>
 
-
+    <!-- LISTA DE PRODUCTOS -->
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rvProductos"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
         android:padding="12dp" />
 </LinearLayout>

@@ -6,14 +6,14 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:background="#ECFDF5"
+    android:background="#F5F3FF"
     tools:context=".Modificar">
 
-
+    <!-- HEADER -->
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="#10B981"
+        android:background="#7C3AED"
         android:padding="16dp"
         android:orientation="vertical"
         android:elevation="4dp">
@@ -25,18 +25,18 @@
             android:textColor="#FFFFFF"
             android:textSize="20sp"
             android:textStyle="bold"
-            android:layout_gravity="center"/>
+            android:layout_gravity="center" />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Gestión de inventario"
-            android:textColor="#D1FAE5"
+            android:textColor="#EDE9FE"
             android:textSize="14sp"
-            android:layout_gravity="center"/>
+            android:layout_gravity="center" />
     </LinearLayout>
 
-
+    <!-- BUSCADOR -->
     <com.google.android.material.card.MaterialCardView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -50,13 +50,12 @@
             android:orientation="horizontal"
             android:padding="8dp">
 
-
             <ImageView
                 android:layout_width="24dp"
                 android:layout_height="24dp"
                 android:src="@drawable/outline_search_24"
-                app:tint="#10B981"
-                android:layout_gravity="center_vertical"/>
+                app:tint="#7C3AED"
+                android:layout_gravity="center_vertical" />
 
             <EditText
                 android:id="@+id/etSearch"
@@ -65,30 +64,50 @@
                 android:hint="Buscar por nombre..."
                 android:padding="8dp"
                 android:background="@android:color/transparent"
-                android:layout_marginStart="8dp"/>
+                android:layout_marginStart="8dp" />
         </LinearLayout>
     </com.google.android.material.card.MaterialCardView>
 
+    <!-- TÍTULO FILTROS + BOTÓN LIMPIAR -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingHorizontal="12dp"
+        android:paddingBottom="4dp"
+        android:gravity="center_vertical"
+        android:orientation="horizontal">
 
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Filtros"
+            android:textColor="#4C1D95"
+            android:textStyle="bold" />
 
+        <TextView
+            android:id="@+id/tvClearFilters"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Limpiar"
+            android:textColor="#8B5CF6"
+            android:textSize="13sp"
+            android:padding="4dp" />
+    </LinearLayout>
+
+    <!-- FILTROS -->
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:paddingHorizontal="12dp"
         android:orientation="vertical">
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Filtros"
-            android:textColor="#065F46"
-            android:textStyle="bold"
-            android:layout_marginBottom="4dp"/>
-
+        <!-- Fila 1 -->
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal">
+            android:orientation="horizontal"
+            android:layout_marginBottom="6dp">
 
             <Spinner
                 android:id="@+id/spBrand"
@@ -96,7 +115,7 @@
                 android:layout_height="48dp"
                 android:layout_weight="1"
                 android:layout_marginEnd="4dp"
-                android:background="@drawable/spinner_background"/>
+                android:background="@drawable/spinner_background" />
 
             <Spinner
                 android:id="@+id/spType"
@@ -104,17 +123,31 @@
                 android:layout_height="48dp"
                 android:layout_weight="1"
                 android:layout_marginEnd="4dp"
-                android:background="@drawable/spinner_background"/>
+                android:background="@drawable/spinner_background" />
 
             <Spinner
                 android:id="@+id/spSize"
                 android:layout_width="0dp"
                 android:layout_height="48dp"
                 android:layout_weight="1"
-                android:background="@drawable/spinner_background"/>
+                android:background="@drawable/spinner_background" />
+        </LinearLayout>
+
+        <!-- Fila 2: Stock -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <Spinner
+                android:id="@+id/spStock"
+                android:layout_width="match_parent"
+                android:layout_height="48dp"
+                android:background="@drawable/spinner_background" />
         </LinearLayout>
     </LinearLayout>
 
+    <!-- STATS -->
     <LinearLayout
         android:id="@+id/layoutStats"
         android:layout_width="match_parent"
@@ -129,7 +162,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:text="Productos: 0"
-            android:textColor="#065F46"/>
+            android:textColor="#4C1D95" />
 
         <TextView
             android:id="@+id/tvTotal"
@@ -137,10 +170,10 @@
             android:layout_height="wrap_content"
             android:text="Unidades: 0"
             android:gravity="end"
-            android:textColor="#065F46"/>
+            android:textColor="#4C1D95" />
     </LinearLayout>
 
-
+    <!-- LISTA -->
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/tblVerStock"
         android:layout_width="match_parent"
@@ -148,6 +181,6 @@
         android:layout_weight="1"
         android:paddingHorizontal="4dp"
         android:clipToPadding="false"
-        tools:listitem="@layout/item_producto_gestion"/>
+        tools:listitem="@layout/item_producto_gestion" />
 
 </LinearLayout>
